@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Jeremy Buchmann</title>
+    <title>How to get <span class="caps">PHP</span> to authenticate with <span class="caps">AD</span> using <span class="caps">LDAPS</span> - Jeremy Buchmann</title>
     <meta name="author" content="Jeremy Buchmann">
+
+
+  <meta name="description" content="If you use Active Directory for authentication and also want to authenticate to it from PHP code, there are a few hoops to jump through, especially if you want to use LDAPS (LDAP over SSL/TLS). The clients accomplish this from PHP using the php-ldap library which uses the OpenLDAP …">
+
 
 
     <link rel="stylesheet" href="https://jeremybuchmann.github.io/theme/css/main.css" type="text/css" />
@@ -31,13 +35,18 @@
       <div class="wrapper">
 
       <div role="main" class="content">
-
-
-
-
-        <article>
-          <h1><a href="https://jeremybuchmann.github.io/how-to-get-php-to-authenticate-with-ad-using-ldaps.html">How to get <span class="caps">PHP</span> to authenticate with <span class="caps">AD</span> using <span class="caps">LDAPS</span></a></h1>
-          <p>If you use Active Directory for authentication and also want to
+	<article class="full">
+		
+		<h1>How to get <span class="caps">PHP</span> to authenticate with <span class="caps">AD</span> using <span class="caps">LDAPS</span></h1>
+		
+<div class="metadata">
+  <time datetime="2016-03-16T21:43:00+01:00">Mar 16, 2016</time>
+    <address class="vcard author">
+      by <a class="url fn" href="https://jeremybuchmann.github.io/author/jeremy-buchmann.html">Jeremy Buchmann</a>
+    </address>
+  in <a href="https://jeremybuchmann.github.io/category/development.html">development</a>
+</div>		
+		<p>If you use Active Directory for authentication and also want to
 authenticate to it from <span class="caps">PHP</span> code, there are a few hoops to jump through,
 especially if you want to use <span class="caps">LDAPS</span> (<span class="caps">LDAP</span> over <span class="caps">SSL</span>/<span class="caps">TLS</span>). The clients
 accomplish this from <span class="caps">PHP</span> using the php-ldap library which uses the
@@ -94,37 +103,10 @@ authentication in your <span class="caps">PHP</span> script should&nbsp;work.</p
 </pre></div>
 
 
-<p>and taking the first line of output to create the hash file&nbsp;name.</p>
-        </article>
+<p>and taking the first line of output to create the hash file&nbsp;name.</p>	
 
-        <hr />
+	</article>
 
-          <div>
-            <h3>Last posts</h3>
-            <ol class="archive">
-
-
-
-        <li>
-<a href="https://jeremybuchmann.github.io/hack4reno-recap.html" rel="bookmark" title="Permalink to Hack4Reno Recap">Hack4Reno&nbsp;Recap</a>
-  <time datetime="2015-11-09T13:02:00+01:00">Nov 09, 2015</time>
-        </li>
-
-
-        <li>
-<a href="https://jeremybuchmann.github.io/five-tools-every-programmer-should-have-that-arent-on-a-computer.html" rel="bookmark" title="Permalink to Five Tools Every Programmer Should Have (that aren’t on a computer)">Five Tools Every Programmer Should Have (that aren&#8217;t on a&nbsp;computer)</a>
-  <time datetime="2012-06-20T15:35:00+02:00">Jun 20, 2012</time>
-        </li>
-
-
-        <li>
-<a href="https://jeremybuchmann.github.io/creating-good-sql-aliases.html" rel="bookmark" title="Permalink to Creating Good SQL Aliases">Creating Good <span class="caps">SQL</span>&nbsp;Aliases</a>
-  <time datetime="2012-06-16T21:15:00+02:00">Jun 16, 2012</time>
-        </li>
-
-
-            </ol>
-          </div>
 
 
       </div>
@@ -142,7 +124,7 @@ authentication in your <span class="caps">PHP</span> script should&nbsp;work.</p
   	          <nav>
                 <h2>Categories</h2>
                 <ul>
-                    <li ><a href="https://jeremybuchmann.github.io/category/development.html">development</a></li>
+                    <li class="active"><a href="https://jeremybuchmann.github.io/category/development.html">development</a></li>
                     <li ><a href="https://jeremybuchmann.github.io/category/misc.html">misc</a></li>
                 </ul>
               </nav>

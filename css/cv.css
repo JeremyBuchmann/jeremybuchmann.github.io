@@ -1,70 +1,78 @@
 
-h2 {
+.content h2 {
     margin: 1em 0 0.2em 0;
 }
 
-hr {
+.content hr {
     margin: 0 1em 0.75em 0;
 }
 
-.caps {
+.content .caps {
     font-variant: normal;
 }
 
-h2 .caps {
+.content h2 .caps {
     font-variant: small-caps;
 }
 
-h4.employer {
+.content h4.employer {
     font-style: italic;
     margin: 0.4em 0 0.5em 0;
 }
 
-ol, ul, li {
+.content ol, .content ul, .content li {
     margin-left: 0.75em;
     padding-left: 0.5em;
 }
 
-p {
+.content p {
     margin: 0;
 }
 
-table.contact {
+.content .social ul {
+    padding-left: 15px;
+}
+
+.content .social li {
+    padding-left: 0;
+}
+
+.content table.contact {
     width: 100%;
     margin-bottom: 1em;
 }
 
-table.jobtitle {
+.content table.jobtitle {
     width: 100%;
 
 }
 
-table.jobtitle th, table.jobtitle td {
+.content table.jobtitle th, .content table.jobtitle td {
     padding: 0;
 }
 
-table.jobtitle td.jobtitle {
+.content table.jobtitle td.jobtitle {
     font-size: 1.25em;
     text-align: left;
 }
 
-table.jobtitle td.date {
+.content table.jobtitle td.date {
     font-size: 1.15em;
     text-align: right;
 }
 
-table.education {
+.content table.education {
     width: 100%;
 }
 
-table.education td.degree {
+.content table.education td.degree {
     font-weight: bold;
 }
 
-table.education td.institution {
+.content table.education td.institution {
 
 }
 
-table.languages {
+.content table.languages {
     width: 50%;
 }

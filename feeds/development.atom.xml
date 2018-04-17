@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeremy Buchmann - development</title><link href="https://jeremybuchmann.github.io/" rel="alternate"></link><link href="https://jeremybuchmann.github.io/feeds/development.atom.xml" rel="self"></link><id>https://jeremybuchmann.github.io/</id><updated>2016-03-16T21:43:00+01:00</updated><entry><title>How to get PHP to authenticate with AD using LDAPS</title><link href="https://jeremybuchmann.github.io/how-to-get-php-to-authenticate-with-ad-using-ldaps.html" rel="alternate"></link><published>2016-03-16T21:43:00+01:00</published><updated>2016-03-16T21:43:00+01:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.github.io,2016-03-16:/how-to-get-php-to-authenticate-with-ad-using-ldaps.html</id><summary type="html">&lt;p&gt;If you use Active Directory for authentication and also want to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeremy Buchmann - development</title><link href="https://jeremybuchmann.com/" rel="alternate"></link><link href="https://jeremybuchmann.com/feeds/development.atom.xml" rel="self"></link><id>https://jeremybuchmann.com/</id><updated>2016-03-16T21:43:00+01:00</updated><entry><title>How to get PHP to authenticate with AD using LDAPS</title><link href="https://jeremybuchmann.com/how-to-get-php-to-authenticate-with-ad-using-ldaps.html" rel="alternate"></link><published>2016-03-16T21:43:00+01:00</published><updated>2016-03-16T21:43:00+01:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2016-03-16:/how-to-get-php-to-authenticate-with-ad-using-ldaps.html</id><summary type="html">&lt;p&gt;If you use Active Directory for authentication and also want to
 authenticate to it from &lt;span class="caps"&gt;PHP&lt;/span&gt; code, there are a few hoops to jump through,
 especially if you want to use &lt;span class="caps"&gt;LDAPS&lt;/span&gt; (&lt;span class="caps"&gt;LDAP&lt;/span&gt; over &lt;span class="caps"&gt;SSL&lt;/span&gt;/&lt;span class="caps"&gt;TLS&lt;/span&gt;). The clients
 accomplish this from &lt;span class="caps"&gt;PHP&lt;/span&gt; using the php-ldap library which uses the
@@ -60,13 +60,13 @@ authentication in your &lt;span class="caps"&gt;PHP&lt;/span&gt; script should&a
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and taking the first line of output to create the hash file&amp;nbsp;name.&lt;/p&gt;</content></entry><entry><title>Five Tools Every Programmer Should Have (that aren’t on a computer)</title><link href="https://jeremybuchmann.github.io/five-tools-every-programmer-should-have-that-arent-on-a-computer.html" rel="alternate"></link><published>2012-06-20T15:35:00+02:00</published><updated>2012-06-20T15:35:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.github.io,2012-06-20:/five-tools-every-programmer-should-have-that-arent-on-a-computer.html</id><summary type="html">&lt;h3&gt;1. Nail&amp;nbsp;Clippers&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="nail clippers" src="https://jeremybuchmann.github.io/images/nail-clippers.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;and taking the first line of output to create the hash file&amp;nbsp;name.&lt;/p&gt;</content></entry><entry><title>Five Tools Every Programmer Should Have (that aren’t on a computer)</title><link href="https://jeremybuchmann.com/five-tools-every-programmer-should-have-that-arent-on-a-computer.html" rel="alternate"></link><published>2012-06-20T15:35:00+02:00</published><updated>2012-06-20T15:35:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-20:/five-tools-every-programmer-should-have-that-arent-on-a-computer.html</id><summary type="html">&lt;h3&gt;1. Nail&amp;nbsp;Clippers&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="nail clippers" src="https://jeremybuchmann.com/images/nail-clippers.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;I have a confession to make. I can&amp;#8217;t type. Never learned. Most
 programmers I&amp;#8217;ve known couldn&amp;#8217;t type either, which is weird. You&amp;#8217;d think
 it&amp;#8217;d be the first thing we learned. Even though the number of symbols in
 code makes touch typing a …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;1. Nail&amp;nbsp;Clippers&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="nail clippers" src="https://jeremybuchmann.github.io/images/nail-clippers.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="nail clippers" src="https://jeremybuchmann.com/images/nail-clippers.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;I have a confession to make. I can&amp;#8217;t type. Never learned. Most
 programmers I&amp;#8217;ve known couldn&amp;#8217;t type either, which is weird. You&amp;#8217;d think
 it&amp;#8217;d be the first thing we learned. Even though the number of symbols in
@@ -88,7 +88,7 @@ desk, the chair was an old, worn out task chair that was missing a bolt
 in the backrest which caused the backrest to hang down 90 degrees from
 where it was supposed to be. It was the only chair they had for me and
 let me tell you, it wasn&amp;#8217;t a pleasant way to spend eight&amp;nbsp;hours.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="chair" src="https://jeremybuchmann.github.io/images/chair.jpg"&gt;
+&lt;p&gt;&lt;img alt="chair" src="https://jeremybuchmann.com/images/chair.jpg"&gt;
 This is not the chair you&amp;#8217;re looking&amp;nbsp;for.&lt;/p&gt;
 &lt;p&gt;There are a
 &lt;a href="http://www.codinghorror.com/blog/2008/07/investing-in-a-quality-programming-chair.html"&gt;ton&lt;/a&gt;
@@ -107,25 +107,25 @@ coaster. Aside from allowing you to show off a little
 or &lt;a href="https://www.cafepress.co.uk/+funny+coasters"&gt;sense of
 humor&lt;/a&gt;, it
 carves out a little spot on your desk just for that bottle of Diet Mr&amp;nbsp;Pibb.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="coaster" src="https://jeremybuchmann.github.io/images/coaster.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="coaster" src="https://jeremybuchmann.com/images/coaster.jpg"&gt;&lt;/p&gt;
 &lt;h3&gt;4. Hand&amp;nbsp;Lotion&lt;/h3&gt;
 &lt;p&gt;Working in Reno where it&amp;#8217;s not unusual to have single-digit humidity, my
 hands dry out to the point that &lt;em&gt;I can&amp;#8217;t stretch my fingers fast enough
 to maintain my normal typing speed&lt;/em&gt;. A little hand lotion goes a long
 way toward keeping that word count&amp;nbsp;high.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="lotion bottle" src="https://jeremybuchmann.github.io/images/lotion.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="lotion bottle" src="https://jeremybuchmann.com/images/lotion.jpg"&gt;&lt;/p&gt;
 &lt;h3&gt;5. Printed &lt;span class="caps"&gt;ASCII&lt;/span&gt;&amp;nbsp;Chart&lt;/h3&gt;
 &lt;p&gt;I&amp;#8217;ve kept one of these on my wall for as long as I can remember. I just
 used it the other day to troubleshoot some incorrectly encoded data we
 were trying to import into our database. Good times with my old&amp;nbsp;friend.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://commons.wikimedia.org/wiki/File:ASCII-Table.svg"&gt;&lt;img alt="ASCII chart" src="https://jeremybuchmann.github.io/images/ascii-table.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://commons.wikimedia.org/wiki/File:ASCII-Table.svg"&gt;&lt;img alt="ASCII chart" src="https://jeremybuchmann.com/images/ascii-table.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;Bonus:&amp;nbsp;Plants&lt;/h3&gt;
 &lt;p&gt;If you&amp;#8217;re the type that likes to work in a &amp;#8220;hacker cave&amp;#8221; (like a
 man-cave, but for nerds&amp;#8230;&lt;span class="caps"&gt;BTW&lt;/span&gt;, how great of a show would that be&amp;#8230;are
 you listening &lt;span class="caps"&gt;HGTV&lt;/span&gt;?), you may want to look into a little houseplant. Any
 old plant will do, but did you know that there are plants that are
 especially good at cleaning the air? &lt;a href="http://www.extension.umn.edu/yardandgarden/ygbriefs/h110indoorair.html"&gt;It&amp;#8217;s
-true&lt;/a&gt;.&lt;/p&gt;</content></entry><entry><title>Creating Good SQL Aliases</title><link href="https://jeremybuchmann.github.io/creating-good-sql-aliases.html" rel="alternate"></link><published>2012-06-16T21:15:00+02:00</published><updated>2012-06-16T21:15:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.github.io,2012-06-16:/creating-good-sql-aliases.html</id><summary type="html">&lt;p&gt;I was reviewing someone else&amp;#8217;s code the other day and noticed something
+true&lt;/a&gt;.&lt;/p&gt;</content></entry><entry><title>Creating Good SQL Aliases</title><link href="https://jeremybuchmann.com/creating-good-sql-aliases.html" rel="alternate"></link><published>2012-06-16T21:15:00+02:00</published><updated>2012-06-16T21:15:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-16:/creating-good-sql-aliases.html</id><summary type="html">&lt;p&gt;I was reviewing someone else&amp;#8217;s code the other day and noticed something
 that has been bugging me ever since I learned &lt;span class="caps"&gt;SQL&lt;/span&gt; (a good 10+ years
 ago): bad &lt;span class="caps"&gt;SQL&lt;/span&gt; aliases.  Let me start with some non-&lt;span class="caps"&gt;SQL&lt;/span&gt; code as an&amp;nbsp;example.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;int a, b;

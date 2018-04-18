@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Jeremy Buchmann</title><link href="http://jeremybuchmann.com/" rel="alternate"></link><link href="http://jeremybuchmann.com/feeds/all.atom.xml" rel="self"></link><id>http://jeremybuchmann.com/</id><updated>2016-03-16T21:43:00+01:00</updated><entry><title>How to get PHP to authenticate with AD using LDAPS</title><link href="http://jeremybuchmann.com/how-to-get-php-to-authenticate-with-ad-using-ldaps.html" rel="alternate"></link><published>2016-03-16T21:43:00+01:00</published><updated>2016-03-16T21:43:00+01:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2016-03-16:/how-to-get-php-to-authenticate-with-ad-using-ldaps.html</id><summary type="html">&lt;p&gt;If you use Active Directory for authentication and also want to
-authenticate to it from &lt;span class="caps"&gt;PHP&lt;/span&gt; code, there are a few hoops to jump through,
-especially if you want to use &lt;span class="caps"&gt;LDAPS&lt;/span&gt; (&lt;span class="caps"&gt;LDAP&lt;/span&gt; over &lt;span class="caps"&gt;SSL&lt;/span&gt;/&lt;span class="caps"&gt;TLS&lt;/span&gt;). The clients
-accomplish this from &lt;span class="caps"&gt;PHP&lt;/span&gt; using the php-ldap library which uses the
+authenticate to it from PHP code, there are a few hoops to jump through,
+especially if you want to use LDAPS (LDAP over SSL/TLS). The clients
+accomplish this from PHP using the php-ldap library which uses the
 OpenLDAP …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you use Active Directory for authentication and also want to
-authenticate to it from &lt;span class="caps"&gt;PHP&lt;/span&gt; code, there are a few hoops to jump through,
-especially if you want to use &lt;span class="caps"&gt;LDAPS&lt;/span&gt; (&lt;span class="caps"&gt;LDAP&lt;/span&gt; over &lt;span class="caps"&gt;SSL&lt;/span&gt;/&lt;span class="caps"&gt;TLS&lt;/span&gt;). The clients
-accomplish this from &lt;span class="caps"&gt;PHP&lt;/span&gt; using the php-ldap library which uses the
+authenticate to it from PHP code, there are a few hoops to jump through,
+especially if you want to use LDAPS (LDAP over SSL/TLS). The clients
+accomplish this from PHP using the php-ldap library which uses the
 OpenLDAP library which in turn uses the OpenSSL library. I bring this up
 because you’ll have to read some documentation from both OpenLDAP and
-OpenSSL to understand what’s going&amp;nbsp;on.&lt;/p&gt;
-&lt;p&gt;When a client program tries to bind to the &lt;span class="caps"&gt;AD&lt;/span&gt; server, OpenSSL will try
-to verify the server’s &lt;span class="caps"&gt;SSL&lt;/span&gt; certificate. &lt;span class="caps"&gt;SSL&lt;/span&gt; certificates are issued by a
-Certificate Authority (&lt;span class="caps"&gt;CA&lt;/span&gt;) which have their own certificates to verify
+OpenSSL to understand what’s going on.&lt;/p&gt;
+&lt;p&gt;When a client program tries to bind to the AD server, OpenSSL will try
+to verify the server’s SSL certificate. SSL certificates are issued by a
+Certificate Authority (CA) which have their own certificates to verify
 their identities. However, if you have self-signed the certificate for
-your &lt;span class="caps"&gt;AD&lt;/span&gt; server, the &lt;span class="caps"&gt;CA&lt;/span&gt; cert is essentially phony. This prevents OpenSSL
+your AD server, the CA cert is essentially phony. This prevents OpenSSL
 from verifying the connection which prevents OpenLDAP from connecting to
-the &lt;span class="caps"&gt;AD&lt;/span&gt;&amp;nbsp;server.&lt;/p&gt;
-&lt;p&gt;There are two ways around&amp;nbsp;this.&lt;/p&gt;
+the AD server.&lt;/p&gt;
+&lt;p&gt;There are two ways around this.&lt;/p&gt;
 &lt;p&gt;One way is to tell OpenLDAP to not perform a check on the server’s
 certificate. To do this, you &lt;em&gt;could&lt;/em&gt; add this directive to
 &lt;code&gt;/etc/openldap/ldap.conf&lt;/code&gt;:&lt;/p&gt;
@@ -28,159 +28,163 @@ certificate. To do this, you &lt;em&gt;could&lt;/em&gt; add this directive to
 &lt;p&gt;But as the &lt;a href="http://www.openldap.org/doc/admin24/tls.html#Client%20Configuration"&gt;OpenLDAP manual
 states&lt;/a&gt;,
 “for clients the default value is &lt;code&gt;demand&lt;/code&gt; and there generally is no
-good reason to change this setting”. So let’s not do&amp;nbsp;that.&lt;/p&gt;
-&lt;p&gt;Instead, we can provide the client with a copy of the server’s &lt;span class="caps"&gt;CA&lt;/span&gt;
+good reason to change this setting”. So let’s not do that.&lt;/p&gt;
+&lt;p&gt;Instead, we can provide the client with a copy of the server’s CA
 certificate. Normally, this would come from Verisign or Thawte or
 whoever you’d buy a server cert from, but since we’ve self-signed a cert
-for the server, we’ve also created a cert for the &lt;span class="caps"&gt;CA&lt;/span&gt;&amp;#8230;which is&amp;nbsp;us.&lt;/p&gt;
-&lt;p&gt;By providing this &lt;span class="caps"&gt;CA&lt;/span&gt; cert to the client, the client will believe that
-the self-signed certificate is valid, which is what we&amp;nbsp;want.&lt;/p&gt;
-&lt;p&gt;The &lt;span class="caps"&gt;CA&lt;/span&gt; cert is a &lt;span class="caps"&gt;PEM&lt;/span&gt; file. Depending on your Linux distribution, the &lt;span class="caps"&gt;CA&lt;/span&gt;
+for the server, we’ve also created a cert for the CA...which is us.&lt;/p&gt;
+&lt;p&gt;By providing this CA cert to the client, the client will believe that
+the self-signed certificate is valid, which is what we want.&lt;/p&gt;
+&lt;p&gt;The CA cert is a PEM file. Depending on your Linux distribution, the CA
 cert file will go into &lt;code&gt;/etc/ssl/certs&lt;/code&gt; (Ubuntu),
 &lt;code&gt;/etc/openldap/cacerts&lt;/code&gt; (Red Hat/CentOS 6), or &lt;code&gt;/etc/openldap/certs&lt;/code&gt;
-(Red Hat/CentOS 7). The permissions on the &lt;span class="caps"&gt;PEM&lt;/span&gt; files must be be
+(Red Hat/CentOS 7). The permissions on the PEM files must be be
 world-readable (644), or you must create a special group, add the owner
 of the process that is accessing the cert to the group, and set the
-permission of the cert file to group-readable&amp;nbsp;(640).&lt;/p&gt;
+permission of the cert file to group-readable (640).&lt;/p&gt;
 &lt;p&gt;There’s one more step. For whatever reason, OpenSSL expects these files
-to be named in the form of &lt;span class="caps"&gt;HHHHHHHH&lt;/span&gt;.D, where each H is a hexadecimal
+to be named in the form of HHHHHHHH.D, where each H is a hexadecimal
 character and D is a single decimal digit. There’s a script in the
 openssl-perl package called &lt;code&gt;c_rehash&lt;/code&gt; that creates symlinks in the
-right format for you. For&amp;nbsp;example:&lt;/p&gt;
+right format for you. For example:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[root@host]# c_rehash /etc/openldap/certs
 Doing /etc/openldap/certs
 host-ca.pem =&amp;gt; 4d86282a.0
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Once you have the &lt;span class="caps"&gt;PEM&lt;/span&gt; files and the symlinks in the right place, the &lt;span class="caps"&gt;AD&lt;/span&gt;
-authentication in your &lt;span class="caps"&gt;PHP&lt;/span&gt; script should&amp;nbsp;work.&lt;/p&gt;
-&lt;p&gt;Note: the c_rehash script is really&amp;nbsp;doing:&lt;/p&gt;
+&lt;p&gt;Once you have the PEM files and the symlinks in the right place, the AD
+authentication in your PHP script should work.&lt;/p&gt;
+&lt;p&gt;Note: the c_rehash script is really doing:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[root@host]# openssl x509 -hash -fingerprint -noout -in file.pem
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and taking the first line of output to create the hash file&amp;nbsp;name.&lt;/p&gt;</content></entry><entry><title>Hack4Reno Recap</title><link href="http://jeremybuchmann.com/hack4reno-recap.html" rel="alternate"></link><published>2015-11-09T13:02:00+01:00</published><updated>2015-11-09T13:02:00+01:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2015-11-09:/hack4reno-recap.html</id><summary type="html">&lt;p&gt;&lt;img alt="badge" src="http://jeremybuchmann.com/images/hack-for-reno-badge.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;and taking the first line of output to create the hash file name.&lt;/p&gt;</content></entry><entry><title>Hack4Reno Recap</title><link href="http://jeremybuchmann.com/hack4reno-recap.html" rel="alternate"></link><published>2015-11-09T13:02:00+01:00</published><updated>2015-11-09T13:02:00+01:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2015-11-09:/hack4reno-recap.html</id><summary type="html">&lt;p&gt;&lt;img alt="badge" src="http://jeremybuchmann.com/images/hack-for-reno-badge.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;The &lt;a href="http://hack4reno.com/"&gt;Hack4Reno Summit&lt;/a&gt; was devised as a data and
 project sharing event to be used as a thought-builder for the annual
 Hack4Reno Hackathon in the spring. Hack4Reno happened last Saturday;
-here&amp;#8217;s my&amp;nbsp;recap:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.linkedin.com/in/ashleyzhand"&gt;Ashley Hand&lt;/a&gt; (&lt;span class="caps"&gt;LA&lt;/span&gt; Civic
+here's my recap:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.linkedin.com/in/ashleyzhand"&gt;Ashley Hand&lt;/a&gt; (LA Civic
 Innovator and Architect) gave the keynote and pointed to some
-interesting&amp;nbsp;facts …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="badge" src="http://jeremybuchmann.com/images/hack-for-reno-badge.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;The &lt;a href="http://hack4reno.com/"&gt;Hack4Reno Summit&lt;/a&gt; was devised as a data and
-project sharing event to be used as a thought-builder for the annual
-Hack4Reno Hackathon in the spring. Hack4Reno happened last Saturday;
-here&amp;#8217;s my&amp;nbsp;recap:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.linkedin.com/in/ashleyzhand"&gt;Ashley Hand&lt;/a&gt; (&lt;span class="caps"&gt;LA&lt;/span&gt; Civic
-Innovator and Architect) gave the keynote and pointed to some
-interesting&amp;nbsp;facts:&lt;/p&gt;
+interesting facts:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Most people (72%) trust local government (as opposed to&amp;nbsp;federal).&lt;/li&gt;
+&lt;li&gt;Most …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="badge" src="http://jeremybuchmann.com/images/hack-for-reno-badge.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;a href="http://hack4reno.com/"&gt;Hack4Reno Summit&lt;/a&gt; was devised as a data and
+project sharing event to be used as a thought-builder for the annual
+Hack4Reno Hackathon in the spring. Hack4Reno happened last Saturday;
+here's my recap:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.linkedin.com/in/ashleyzhand"&gt;Ashley Hand&lt;/a&gt; (LA Civic
+Innovator and Architect) gave the keynote and pointed to some
+interesting facts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Most people (72%) trust local government (as opposed to federal).&lt;/li&gt;
 &lt;li&gt;Government communication is often the problem, not the services
     themselves. Example: surveyed opinion of snowplow service in some
     city (Cleveland?) went up after the city implemented a real-time
     snowplow location and plowing schedule online, even though the
-    plowing service didn’t&amp;nbsp;change.&lt;/li&gt;
+    plowing service didn’t change.&lt;/li&gt;
 &lt;li&gt;Government doesn’t always communicate within itself. Example: a
     group of state employees were given the task to find a data set from
     another department that none of them worked in within 10 minutes.
     They tried Googling, calling co-workers, and other methods, but none
     of them got the data in time. The presenter got the data in 30
-    seconds from a data portal that none of the participants knew&amp;nbsp;existed.&lt;/li&gt;
+    seconds from a data portal that none of the participants knew
+    existed.&lt;/li&gt;
 &lt;li&gt;There are benefits to testing “smarter city” ideas in a “living lab”
-    environment before rolling them out&amp;nbsp;city-wide.&lt;/li&gt;
+    environment before rolling them out city-wide.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/andrew-clinger-53857569"&gt;Andrew Clinger&lt;/a&gt;
 (Reno City Manager) showed off the new city data portal which runs on
 &lt;a href="https://www.socrata.com/"&gt;Socrata&lt;/a&gt;. It’s nice, but terribly expensive
-(almost \$100k…not sure if that’s once or per&amp;nbsp;year).&lt;/p&gt;
+(almost \$100k…not sure if that’s once or per year).&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/will-kurt-2591a155"&gt;Will Kurt&lt;/a&gt; (Data
 Scientist) gave an eye-opening talk on mathematical Expectation vs.
 Variance as it relates to evaluating risk and making predictions based
-on&amp;nbsp;data.&lt;/p&gt;
+on data.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/adamon"&gt;Anjeanette Damon&lt;/a&gt; (reporter for
-&lt;span class="caps"&gt;RGJ&lt;/span&gt;) discussed data-driven and data-enabled journalism. Example: using
+RGJ) discussed data-driven and data-enabled journalism. Example: using
 real-estate data to discover short-sale scams perpetrated by
-unscrupulous real estate&amp;nbsp;agents.&lt;/p&gt;
+unscrupulous real estate agents.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/joechavez"&gt;Joe Chavez&lt;/a&gt; (Software Engineer)
 talked about the nuts and bolts of hackathons, both public and
-intra-organization, and how to participate in&amp;nbsp;one.&lt;/p&gt;
+intra-organization, and how to participate in one.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/jessicacarsten"&gt;Jessica Carsten&lt;/a&gt; from
-Socrata gave a great talk on data portals. Main&amp;nbsp;points:&lt;/p&gt;
+Socrata gave a great talk on data portals. Main points:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Data is the tool, not the end&amp;nbsp;result.&lt;/li&gt;
-&lt;li&gt;Internal users may/should be the primary end&amp;nbsp;users.&lt;/li&gt;
-&lt;li&gt;Start with what you’ve&amp;nbsp;got.&lt;/li&gt;
-&lt;li&gt;Don’t make public data 2nd class; eat your own dog&amp;nbsp;food.&lt;/li&gt;
+&lt;li&gt;Data is the tool, not the end result.&lt;/li&gt;
+&lt;li&gt;Internal users may/should be the primary end users.&lt;/li&gt;
+&lt;li&gt;Start with what you’ve got.&lt;/li&gt;
+&lt;li&gt;Don’t make public data 2nd class; eat your own dog food.&lt;/li&gt;
 &lt;li&gt;Automate publishing, otherwise you are just contributing to future
-    bit&amp;nbsp;rot.&lt;/li&gt;
+    bit rot.&lt;/li&gt;
 &lt;li&gt;Push data to existing portals where people already go, i.e. real
-    estate data to&amp;nbsp;Zillow.&lt;/li&gt;
+    estate data to Zillow.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/keithanderson"&gt;Keith Anderson&lt;/a&gt; (President
 of Trinity Applied Internet) showed how to create APIs from static data
 (like a table on a web page) with &lt;a href="https://www.kimonolabs.com/"&gt;Kimono&lt;/a&gt;
-which was really, really&amp;nbsp;awesome.&lt;/p&gt;
-&lt;p&gt;Kim Robinson discussed regional&amp;nbsp;planning.&lt;/p&gt;
+which was really, really awesome.&lt;/p&gt;
+&lt;p&gt;Kim Robinson discussed regional planning.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/ashleynoelhennefer"&gt;Ashley Hennefer&lt;/a&gt;
-(Writer &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Researcher) talked about how to participate in hackathons
+(Writer &amp;amp; Researcher) talked about how to participate in hackathons
 without being a programmer. Designers, testers, writers, presenters and
-various subject-matter experts as also&amp;nbsp;needed.&lt;/p&gt;
+various subject-matter experts as also needed.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/lynnecbarker"&gt;Lynne Barker&lt;/a&gt; (Sustainability
 Manager at City of Reno) discussed tools such as
 &lt;a href="http://www2.mysidewalk.com/"&gt;mysidewalk&lt;/a&gt; for evaluating sustainability
 needs and pointed out that manual data gathering is expensive and should
-be automated where&amp;nbsp;possible.&lt;/p&gt;
+be automated where possible.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/alicia-barber-26a96125"&gt;Alicia Barber&lt;/a&gt;
 (Historian) discussed the presentation of historical data using mobile
-apps which allow self-guided tours with photos, oral histories, and&amp;nbsp;text.&lt;/p&gt;
+apps which allow self-guided tours with photos, oral histories, and
+text.&lt;/p&gt;
 &lt;p&gt;Matthew Bertman from &lt;a href="http://filament.com/"&gt;Filament&lt;/a&gt; discussed his
 company’s wireless IoT products which are aiming for as much as 10 miles
-of line-of-sight range with 3-5 years of battery&amp;nbsp;life.&lt;/p&gt;
+of line-of-sight range with 3-5 years of battery life.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/kelseymccutcheon"&gt;Kelsey Fitzgerald&lt;/a&gt;
 (Science Writer) discussed the challenges and benefits of crowdsourcing
 data, specifically, a species survey of the Truckee River. The gist was
 that crowdsourcing is best for creating a conversation around data, and
 may be the only way to obtain data if you have no money. In terms of
 obtaining the data, it is slow, difficult to keep people motivated, and
-can lead to erroneous&amp;nbsp;data.&lt;/p&gt;
+can lead to erroneous data.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.linkedin.com/in/colinmrobertson"&gt;Colin Robertson&lt;/a&gt; (Curator)
-discussed the intersections of art and data and data-inspired&amp;nbsp;artists.&lt;/p&gt;
+discussed the intersections of art and data and data-inspired artists.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://projectbaseline.org/"&gt;Project Baseline&lt;/a&gt; discussed their efforts
-to use &lt;span class="caps"&gt;SCUBA&lt;/span&gt; divers as citizen scientists for gathering data on change
-in aquatic&amp;nbsp;environments.&lt;/p&gt;
-&lt;p&gt;Some students from &lt;span class="caps"&gt;UNR&lt;/span&gt; presented &lt;span class="caps"&gt;GIS&lt;/span&gt; data from the
-&lt;a href="http://renotracks.nevadabike.org/"&gt;RenoTracks&lt;/a&gt;&amp;nbsp;project.&lt;/p&gt;</content></entry><entry><title>Five Tools Every Programmer Should Have (that aren’t on a computer)</title><link href="http://jeremybuchmann.com/five-tools-every-programmer-should-have-that-arent-on-a-computer.html" rel="alternate"></link><published>2012-06-20T15:35:00+02:00</published><updated>2012-06-20T15:35:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-20:/five-tools-every-programmer-should-have-that-arent-on-a-computer.html</id><summary type="html">&lt;h3&gt;1. Nail&amp;nbsp;Clippers&lt;/h3&gt;
+to use SCUBA divers as citizen scientists for gathering data on change
+in aquatic environments.&lt;/p&gt;
+&lt;p&gt;Some students from UNR presented GIS data from the
+&lt;a href="http://renotracks.nevadabike.org/"&gt;RenoTracks&lt;/a&gt; project.&lt;/p&gt;</content></entry><entry><title>Five Tools Every Programmer Should Have (that aren't on a computer)</title><link href="http://jeremybuchmann.com/five-tools-every-programmer-should-have-that-arent-on-a-computer.html" rel="alternate"></link><published>2012-06-20T15:35:00+02:00</published><updated>2012-06-20T15:35:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-20:/five-tools-every-programmer-should-have-that-arent-on-a-computer.html</id><summary type="html">&lt;h3&gt;1. Nail Clippers&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="nail clippers" src="http://jeremybuchmann.com/images/nail-clippers.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;I have a confession to make. I can&amp;#8217;t type. Never learned. Most
-programmers I&amp;#8217;ve known couldn&amp;#8217;t type either, which is weird. You&amp;#8217;d think
-it&amp;#8217;d be the first thing we learned. Even though the number of symbols in
-code makes touch typing a …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;1. Nail&amp;nbsp;Clippers&lt;/h3&gt;
+&lt;p&gt;I have a confession to make. I can't type. Never learned. Most
+programmers I've known couldn't type either, which is weird. You'd think
+it'd be the first thing we learned. Even though the number of symbols in
+code makes touch typing a little less effective (so I've …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;1. Nail Clippers&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="nail clippers" src="http://jeremybuchmann.com/images/nail-clippers.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;I have a confession to make. I can&amp;#8217;t type. Never learned. Most
-programmers I&amp;#8217;ve known couldn&amp;#8217;t type either, which is weird. You&amp;#8217;d think
-it&amp;#8217;d be the first thing we learned. Even though the number of symbols in
-code makes touch typing a little less effective (so I&amp;#8217;ve been told), we
+&lt;p&gt;I have a confession to make. I can't type. Never learned. Most
+programmers I've known couldn't type either, which is weird. You'd think
+it'd be the first thing we learned. Even though the number of symbols in
+code makes touch typing a little less effective (so I've been told), we
 still have to write documentation which is mostly words (you are writing
-documentation, right? Good.) Even though I can&amp;#8217;t type, I&amp;#8217;m a pretty fast
+documentation, right? Good.) Even though I can't type, I'm a pretty fast
 hunter-and-pecker. But what really kills my accuracy and speed is when
 my fingernails get long enough to get in the way. Keep those babies
-trimmed and those fingers&amp;nbsp;flying.&lt;/p&gt;
-&lt;h3&gt;2. A Good&amp;nbsp;Chair&lt;/h3&gt;
+trimmed and those fingers flying.&lt;/p&gt;
+&lt;h3&gt;2. A Good Chair&lt;/h3&gt;
 &lt;p&gt;It goes without saying that you want to be comfortable while you work.
 Some people are doing the
 &lt;a href="http://lifehacker.com/5830748/why-i-switched-my-office-chair-with-an-exercise-ball-and-what-it-feels-like"&gt;exercise-ball-as-a-chair&lt;/a&gt;
 thing while others are going for the &lt;a href="http://lifehacker.com/5735528/why-and-how-i-switched-to-a-standing-desk"&gt;standing
 desk&lt;/a&gt;.
-But most of us sit in chairs, and chairs vary widely in&amp;nbsp;quality.&lt;/p&gt;
+But most of us sit in chairs, and chairs vary widely in quality.&lt;/p&gt;
 &lt;p&gt;I remember starting a new job some years back and when I was shown to my
 desk, the chair was an old, worn out task chair that was missing a bolt
 in the backrest which caused the backrest to hang down 90 degrees from
 where it was supposed to be. It was the only chair they had for me and
-let me tell you, it wasn&amp;#8217;t a pleasant way to spend eight&amp;nbsp;hours.&lt;/p&gt;
+let me tell you, it wasn't a pleasant way to spend eight hours.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="chair" src="http://jeremybuchmann.com/images/chair.jpg"&gt;
-This is not the chair you&amp;#8217;re looking&amp;nbsp;for.&lt;/p&gt;
+This is not the chair you're looking for.&lt;/p&gt;
 &lt;p&gt;There are a
 &lt;a href="http://www.codinghorror.com/blog/2008/07/investing-in-a-quality-programming-chair.html"&gt;ton&lt;/a&gt;
 &lt;a href="http://techcrunch.com/2006/12/28/workspace-roundup-ergonomic-chairs/"&gt;of&lt;/a&gt;
@@ -188,60 +192,64 @@ This is not the chair you&amp;#8217;re looking&amp;nbsp;for.&lt;/p&gt;
 there for the new chair buyer, but if you find all of those options
 lacking, you could &lt;a href="http://www.arrickrobotics.com/chair/"&gt;make your own computer chair from a luxury car
 seat&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;3.&amp;nbsp;Coaster&lt;/h3&gt;
+&lt;h3&gt;3. Coaster&lt;/h3&gt;
 &lt;p&gt;Do you have a lot of papers scattered on your desk? And have you ever
 set a cold drink down, not realizing you were setting it down on
 something you were going to give to someone else? I bet they
-didn&amp;#8217;t appreciate the nice wet ring on that report. Easy solution: a
+didn't appreciate the nice wet ring on that report. Easy solution: a
 coaster. Aside from allowing you to show off a little
 &lt;a href="http://www.thegreenhead.com/2007/11/lego-coaster-set.php"&gt;personality&lt;/a&gt;
 or &lt;a href="https://www.cafepress.co.uk/+funny+coasters"&gt;sense of
 humor&lt;/a&gt;, it
-carves out a little spot on your desk just for that bottle of Diet Mr&amp;nbsp;Pibb.&lt;/p&gt;
+carves out a little spot on your desk just for that bottle of Diet Mr
+Pibb.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="coaster" src="http://jeremybuchmann.com/images/coaster.jpg"&gt;&lt;/p&gt;
-&lt;h3&gt;4. Hand&amp;nbsp;Lotion&lt;/h3&gt;
-&lt;p&gt;Working in Reno where it&amp;#8217;s not unusual to have single-digit humidity, my
-hands dry out to the point that &lt;em&gt;I can&amp;#8217;t stretch my fingers fast enough
+&lt;h3&gt;4. Hand Lotion&lt;/h3&gt;
+&lt;p&gt;Working in Reno where it's not unusual to have single-digit humidity, my
+hands dry out to the point that &lt;em&gt;I can't stretch my fingers fast enough
 to maintain my normal typing speed&lt;/em&gt;. A little hand lotion goes a long
-way toward keeping that word count&amp;nbsp;high.&lt;/p&gt;
+way toward keeping that word count high.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="lotion bottle" src="http://jeremybuchmann.com/images/lotion.jpg"&gt;&lt;/p&gt;
-&lt;h3&gt;5. Printed &lt;span class="caps"&gt;ASCII&lt;/span&gt;&amp;nbsp;Chart&lt;/h3&gt;
-&lt;p&gt;I&amp;#8217;ve kept one of these on my wall for as long as I can remember. I just
+&lt;h3&gt;5. Printed ASCII Chart&lt;/h3&gt;
+&lt;p&gt;I've kept one of these on my wall for as long as I can remember. I just
 used it the other day to troubleshoot some incorrectly encoded data we
-were trying to import into our database. Good times with my old&amp;nbsp;friend.&lt;/p&gt;
+were trying to import into our database. Good times with my old friend.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://commons.wikimedia.org/wiki/File:ASCII-Table.svg"&gt;&lt;img alt="ASCII chart" src="http://jeremybuchmann.com/images/ascii-table.png"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;Bonus:&amp;nbsp;Plants&lt;/h3&gt;
-&lt;p&gt;If you&amp;#8217;re the type that likes to work in a &amp;#8220;hacker cave&amp;#8221; (like a
-man-cave, but for nerds&amp;#8230;&lt;span class="caps"&gt;BTW&lt;/span&gt;, how great of a show would that be&amp;#8230;are
-you listening &lt;span class="caps"&gt;HGTV&lt;/span&gt;?), you may want to look into a little houseplant. Any
+&lt;h3&gt;Bonus: Plants&lt;/h3&gt;
+&lt;p&gt;If you're the type that likes to work in a "hacker cave" (like a
+man-cave, but for nerds...BTW, how great of a show would that be...are
+you listening HGTV?), you may want to look into a little houseplant. Any
 old plant will do, but did you know that there are plants that are
-especially good at cleaning the air? &lt;a href="http://www.extension.umn.edu/yardandgarden/ygbriefs/h110indoorair.html"&gt;It&amp;#8217;s
-true&lt;/a&gt;.&lt;/p&gt;</content></entry><entry><title>Creating Good SQL Aliases</title><link href="http://jeremybuchmann.com/creating-good-sql-aliases.html" rel="alternate"></link><published>2012-06-16T21:15:00+02:00</published><updated>2012-06-16T21:15:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-16:/creating-good-sql-aliases.html</id><summary type="html">&lt;p&gt;I was reviewing someone else&amp;#8217;s code the other day and noticed something
-that has been bugging me ever since I learned &lt;span class="caps"&gt;SQL&lt;/span&gt; (a good 10+ years
-ago): bad &lt;span class="caps"&gt;SQL&lt;/span&gt; aliases.  Let me start with some non-&lt;span class="caps"&gt;SQL&lt;/span&gt; code as an&amp;nbsp;example.&lt;/p&gt;
+especially good at cleaning the air? &lt;a href="http://www.extension.umn.edu/yardandgarden/ygbriefs/h110indoorair.html"&gt;It's
+true&lt;/a&gt;.&lt;/p&gt;</content></entry><entry><title>Creating Good SQL Aliases</title><link href="http://jeremybuchmann.com/creating-good-sql-aliases.html" rel="alternate"></link><published>2012-06-16T21:15:00+02:00</published><updated>2012-06-16T21:15:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-16:/creating-good-sql-aliases.html</id><summary type="html">&lt;p&gt;I was reviewing someone else's code the other day and noticed something
+that has been bugging me ever since I learned SQL (a good 10+ years
+ago): bad SQL aliases.  Let me start with some non-SQL code as an
+example.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;int a, b;
 string c;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;If you saw …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was reviewing someone else&amp;#8217;s code the other day and noticed something
-that has been bugging me ever since I learned &lt;span class="caps"&gt;SQL&lt;/span&gt; (a good 10+ years
-ago): bad &lt;span class="caps"&gt;SQL&lt;/span&gt; aliases.  Let me start with some non-&lt;span class="caps"&gt;SQL&lt;/span&gt; code as an&amp;nbsp;example.&lt;/p&gt;
+&lt;p&gt;If you saw this in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was reviewing someone else's code the other day and noticed something
+that has been bugging me ever since I learned SQL (a good 10+ years
+ago): bad SQL aliases.  Let me start with some non-SQL code as an
+example.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;int a, b;
 string c;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;If you saw this in a real-life program, you&amp;#8217;d think that whoever wrote
-it was either exceptionally lazy or didn&amp;#8217;t know what they were doing. In
-this day and age, you expect good variable names, even if they&amp;#8217;re a bit&amp;nbsp;long.&lt;/p&gt;
+&lt;p&gt;If you saw this in a real-life program, you'd think that whoever wrote
+it was either exceptionally lazy or didn't know what they were doing. In
+this day and age, you expect good variable names, even if they're a bit
+long.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;int numEmployees, selectedEmployeeId;
 string companyName;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Obviously, that&amp;#8217;s much better. So why do I keep seeing &lt;span class="caps"&gt;SQL&lt;/span&gt; queries that
-look like&amp;nbsp;this:&lt;/p&gt;
+&lt;p&gt;Obviously, that's much better. So why do I keep seeing SQL queries that
+look like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SELECT a.action,
        a.tstamp,
        b.fname,
@@ -261,13 +269,13 @@ ORDER BY d.lname, d.fname, a.tstamp
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;If you&amp;#8217;re trying to figure out the meaning of the expressions in the
-&lt;span class="caps"&gt;SELECT&lt;/span&gt; list or the &lt;span class="caps"&gt;WHERE&lt;/span&gt; clauses, you have to keep referring to the &lt;span class="caps"&gt;JOIN&lt;/span&gt;
+&lt;p&gt;If you're trying to figure out the meaning of the expressions in the
+SELECT list or the WHERE clauses, you have to keep referring to the JOIN
 sections to translate the a, b, c, and d aliases into their actual table
-names. In small-ish queries such as this one, it&amp;#8217;s not a huge deal, but
+names. In small-ish queries such as this one, it's not a huge deal, but
 when the queries start getting up to 50 or 100 lines, it becomes a real
 chore to track down each letter alias. Now look at the same query with
-just a few more&amp;nbsp;keystrokes:&lt;/p&gt;
+just a few more keystrokes:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SELECT plog.action,
        plog.tstamp,
        employee.fname,
@@ -287,8 +295,8 @@ ORDER BY approver.lname, approver.fname, plog.tstamp
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;So much nicer! You know right away that the third &lt;span class="caps"&gt;SELECT&lt;/span&gt; expression is
-the employee&amp;#8217;s first name and that the first &lt;span class="caps"&gt;ORDER&lt;/span&gt; clause is the
-approver&amp;#8217;s last&amp;nbsp;name.&lt;/p&gt;
-&lt;p&gt;An &lt;span class="caps"&gt;SQL&lt;/span&gt; alias is much like a variable name. The better the name, the
-easier it is to figure out what the code is trying to&amp;nbsp;do.&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;So much nicer! You know right away that the third SELECT expression is
+the employee's first name and that the first ORDER clause is the
+approver's last name.&lt;/p&gt;
+&lt;p&gt;An SQL alias is much like a variable name. The better the name, the
+easier it is to figure out what the code is trying to do.&lt;/p&gt;</content></entry></feed>

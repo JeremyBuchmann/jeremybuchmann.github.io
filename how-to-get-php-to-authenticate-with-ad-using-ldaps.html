@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>How to get <span class="caps">PHP</span> to authenticate with <span class="caps">AD</span> using <span class="caps">LDAPS</span> - Jeremy Buchmann</title>
+    <title>How to get PHP to authenticate with AD using LDAPS - Jeremy Buchmann</title>
     <meta name="author" content="Jeremy Buchmann">
 
 
@@ -10,7 +10,7 @@
 
 	<meta name="twitter:card" content="summary">
 	  <meta name="twitter:creator" content="@jeremybuchmann">
-	<meta name="twitter:title" content="How to get <span class="caps">PHP</span> to authenticate with <span class="caps">AD</span> using <span class="caps">LDAPS</span>">
+	<meta name="twitter:title" content="How to get PHP to authenticate with AD using LDAPS">
 	<meta name="twitter:description" content="If you use Active Directory for authentication and also want to authenticate to it from PHP code, there are a few hoops to jump through, especially if you want to use LDAPS (LDAP over SSL/TLS). The clients accomplish this from PHP using the php-ldap library which uses the OpenLDAP …">
 	<meta name="twitter:url" content="http://jeremybuchmann.com/how-to-get-php-to-authenticate-with-ad-using-ldaps.html">
 
@@ -31,8 +31,8 @@
           <a href="http://jeremybuchmann.com/feeds/all.atom.xml" rel="alternate"><img src="http://jeremybuchmann.com/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
         </div>
           <nav class="pages">
-              <a href="http://jeremybuchmann.com/pages/about-me.html">About&nbsp;Me</a>
--              <a href="http://jeremybuchmann.com/pages/curriculum-vitae.html">Curriculum&nbsp;Vitae</a>
+              <a href="http://jeremybuchmann.com/pages/about-me.html">About Me</a>
+-              <a href="http://jeremybuchmann.com/pages/curriculum-vitae.html">Curriculum Vitae</a>
           </nav>
     <a href="http://jeremybuchmann.com" class="title">Jeremy Buchmann</a>
       </header>
@@ -42,7 +42,7 @@
       <div role="main" class="content">
 	<article class="full">
 		
-		<h1>How to get <span class="caps">PHP</span> to authenticate with <span class="caps">AD</span> using <span class="caps">LDAPS</span></h1>
+		<h1>How to get PHP to authenticate with AD using LDAPS</h1>
 		
 <div class="metadata">
   <time datetime="2016-03-16T21:43:00+01:00">Mar 16, 2016</time>
@@ -52,20 +52,20 @@
   in <a href="http://jeremybuchmann.com/category/development.html">development</a>
 </div>		
 		<p>If you use Active Directory for authentication and also want to
-authenticate to it from <span class="caps">PHP</span> code, there are a few hoops to jump through,
-especially if you want to use <span class="caps">LDAPS</span> (<span class="caps">LDAP</span> over <span class="caps">SSL</span>/<span class="caps">TLS</span>). The clients
-accomplish this from <span class="caps">PHP</span> using the php-ldap library which uses the
+authenticate to it from PHP code, there are a few hoops to jump through,
+especially if you want to use LDAPS (LDAP over SSL/TLS). The clients
+accomplish this from PHP using the php-ldap library which uses the
 OpenLDAP library which in turn uses the OpenSSL library. I bring this up
 because you’ll have to read some documentation from both OpenLDAP and
-OpenSSL to understand what’s going&nbsp;on.</p>
-<p>When a client program tries to bind to the <span class="caps">AD</span> server, OpenSSL will try
-to verify the server’s <span class="caps">SSL</span> certificate. <span class="caps">SSL</span> certificates are issued by a
-Certificate Authority (<span class="caps">CA</span>) which have their own certificates to verify
+OpenSSL to understand what’s going on.</p>
+<p>When a client program tries to bind to the AD server, OpenSSL will try
+to verify the server’s SSL certificate. SSL certificates are issued by a
+Certificate Authority (CA) which have their own certificates to verify
 their identities. However, if you have self-signed the certificate for
-your <span class="caps">AD</span> server, the <span class="caps">CA</span> cert is essentially phony. This prevents OpenSSL
+your AD server, the CA cert is essentially phony. This prevents OpenSSL
 from verifying the connection which prevents OpenLDAP from connecting to
-the <span class="caps">AD</span>&nbsp;server.</p>
-<p>There are two ways around&nbsp;this.</p>
+the AD server.</p>
+<p>There are two ways around this.</p>
 <p>One way is to tell OpenLDAP to not perform a check on the server’s
 certificate. To do this, you <em>could</em> add this directive to
 <code>/etc/openldap/ldap.conf</code>:</p>
@@ -76,39 +76,39 @@ certificate. To do this, you <em>could</em> add this directive to
 <p>But as the <a href="http://www.openldap.org/doc/admin24/tls.html#Client%20Configuration">OpenLDAP manual
 states</a>,
 “for clients the default value is <code>demand</code> and there generally is no
-good reason to change this setting”. So let’s not do&nbsp;that.</p>
-<p>Instead, we can provide the client with a copy of the server’s <span class="caps">CA</span>
+good reason to change this setting”. So let’s not do that.</p>
+<p>Instead, we can provide the client with a copy of the server’s CA
 certificate. Normally, this would come from Verisign or Thawte or
 whoever you’d buy a server cert from, but since we’ve self-signed a cert
-for the server, we’ve also created a cert for the <span class="caps">CA</span>&#8230;which is&nbsp;us.</p>
-<p>By providing this <span class="caps">CA</span> cert to the client, the client will believe that
-the self-signed certificate is valid, which is what we&nbsp;want.</p>
-<p>The <span class="caps">CA</span> cert is a <span class="caps">PEM</span> file. Depending on your Linux distribution, the <span class="caps">CA</span>
+for the server, we’ve also created a cert for the CA...which is us.</p>
+<p>By providing this CA cert to the client, the client will believe that
+the self-signed certificate is valid, which is what we want.</p>
+<p>The CA cert is a PEM file. Depending on your Linux distribution, the CA
 cert file will go into <code>/etc/ssl/certs</code> (Ubuntu),
 <code>/etc/openldap/cacerts</code> (Red Hat/CentOS 6), or <code>/etc/openldap/certs</code>
-(Red Hat/CentOS 7). The permissions on the <span class="caps">PEM</span> files must be be
+(Red Hat/CentOS 7). The permissions on the PEM files must be be
 world-readable (644), or you must create a special group, add the owner
 of the process that is accessing the cert to the group, and set the
-permission of the cert file to group-readable&nbsp;(640).</p>
+permission of the cert file to group-readable (640).</p>
 <p>There’s one more step. For whatever reason, OpenSSL expects these files
-to be named in the form of <span class="caps">HHHHHHHH</span>.D, where each H is a hexadecimal
+to be named in the form of HHHHHHHH.D, where each H is a hexadecimal
 character and D is a single decimal digit. There’s a script in the
 openssl-perl package called <code>c_rehash</code> that creates symlinks in the
-right format for you. For&nbsp;example:</p>
+right format for you. For example:</p>
 <div class="highlight"><pre><span></span>[root@host]# c_rehash /etc/openldap/certs
 Doing /etc/openldap/certs
 host-ca.pem =&gt; 4d86282a.0
 </pre></div>
 
 
-<p>Once you have the <span class="caps">PEM</span> files and the symlinks in the right place, the <span class="caps">AD</span>
-authentication in your <span class="caps">PHP</span> script should&nbsp;work.</p>
-<p>Note: the c_rehash script is really&nbsp;doing:</p>
+<p>Once you have the PEM files and the symlinks in the right place, the AD
+authentication in your PHP script should work.</p>
+<p>Note: the c_rehash script is really doing:</p>
 <div class="highlight"><pre><span></span>[root@host]# openssl x509 -hash -fingerprint -noout -in file.pem
 </pre></div>
 
 
-<p>and taking the first line of output to create the hash file&nbsp;name.</p>	
+<p>and taking the first line of output to create the hash file name.</p>	
 
 	</article>
 

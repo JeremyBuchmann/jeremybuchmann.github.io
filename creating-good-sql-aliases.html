@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Creating Good <span class="caps">SQL</span>&nbsp;Aliases - Jeremy Buchmann</title>
+    <title>Creating Good SQL Aliases - Jeremy Buchmann</title>
     <meta name="author" content="Jeremy Buchmann">
 
 
-  <meta name="description" content="I was reviewing someone else’s code the other day and noticed something that has been bugging me ever since I learned SQL (a good 10+ years ago): bad SQL aliases. Let me start with some non-SQL code as an example. int a, b; string c; If you saw …">
+  <meta name="description" content="I was reviewing someone else's code the other day and noticed something that has been bugging me ever since I learned SQL (a good 10+ years ago): bad SQL aliases. Let me start with some non-SQL code as an example. int a, b; string c; If you saw this in …">
 
 	<meta name="twitter:card" content="summary">
 	  <meta name="twitter:creator" content="@jeremybuchmann">
-	<meta name="twitter:title" content="Creating Good <span class="caps">SQL</span>&nbsp;Aliases">
-	<meta name="twitter:description" content="I was reviewing someone else’s code the other day and noticed something that has been bugging me ever since I learned SQL (a good 10+ years ago): bad SQL aliases. Let me start with some non-SQL code as an example. int a, b; string c; If you saw …">
+	<meta name="twitter:title" content="Creating Good SQL Aliases">
+	<meta name="twitter:description" content="I was reviewing someone else's code the other day and noticed something that has been bugging me ever since I learned SQL (a good 10+ years ago): bad SQL aliases. Let me start with some non-SQL code as an example. int a, b; string c; If you saw this in …">
 	<meta name="twitter:url" content="http://jeremybuchmann.com/creating-good-sql-aliases.html">
 
 
@@ -31,8 +31,8 @@
           <a href="http://jeremybuchmann.com/feeds/all.atom.xml" rel="alternate"><img src="http://jeremybuchmann.com/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
         </div>
           <nav class="pages">
-              <a href="http://jeremybuchmann.com/pages/about-me.html">About&nbsp;Me</a>
--              <a href="http://jeremybuchmann.com/pages/curriculum-vitae.html">Curriculum&nbsp;Vitae</a>
+              <a href="http://jeremybuchmann.com/pages/about-me.html">About Me</a>
+-              <a href="http://jeremybuchmann.com/pages/curriculum-vitae.html">Curriculum Vitae</a>
           </nav>
     <a href="http://jeremybuchmann.com" class="title">Jeremy Buchmann</a>
       </header>
@@ -42,7 +42,7 @@
       <div role="main" class="content">
 	<article class="full">
 		
-		<h1>Creating Good <span class="caps">SQL</span>&nbsp;Aliases</h1>
+		<h1>Creating Good SQL Aliases</h1>
 		
 <div class="metadata">
   <time datetime="2012-06-16T21:15:00+02:00">Jun 16, 2012</time>
@@ -51,24 +51,26 @@
     </address>
   in <a href="http://jeremybuchmann.com/category/development.html">development</a>
 </div>		
-		<p>I was reviewing someone else&#8217;s code the other day and noticed something
-that has been bugging me ever since I learned <span class="caps">SQL</span> (a good 10+ years
-ago): bad <span class="caps">SQL</span> aliases.  Let me start with some non-<span class="caps">SQL</span> code as an&nbsp;example.</p>
+		<p>I was reviewing someone else's code the other day and noticed something
+that has been bugging me ever since I learned SQL (a good 10+ years
+ago): bad SQL aliases.  Let me start with some non-SQL code as an
+example.</p>
 <div class="highlight"><pre><span></span>int a, b;
 string c;
 </pre></div>
 
 
-<p>If you saw this in a real-life program, you&#8217;d think that whoever wrote
-it was either exceptionally lazy or didn&#8217;t know what they were doing. In
-this day and age, you expect good variable names, even if they&#8217;re a bit&nbsp;long.</p>
+<p>If you saw this in a real-life program, you'd think that whoever wrote
+it was either exceptionally lazy or didn't know what they were doing. In
+this day and age, you expect good variable names, even if they're a bit
+long.</p>
 <div class="highlight"><pre><span></span>int numEmployees, selectedEmployeeId;
 string companyName;
 </pre></div>
 
 
-<p>Obviously, that&#8217;s much better. So why do I keep seeing <span class="caps">SQL</span> queries that
-look like&nbsp;this:</p>
+<p>Obviously, that's much better. So why do I keep seeing SQL queries that
+look like this:</p>
 <div class="highlight"><pre><span></span>SELECT a.action,
        a.tstamp,
        b.fname,
@@ -88,13 +90,13 @@ ORDER BY d.lname, d.fname, a.tstamp
 </pre></div>
 
 
-<p>If you&#8217;re trying to figure out the meaning of the expressions in the
-<span class="caps">SELECT</span> list or the <span class="caps">WHERE</span> clauses, you have to keep referring to the <span class="caps">JOIN</span>
+<p>If you're trying to figure out the meaning of the expressions in the
+SELECT list or the WHERE clauses, you have to keep referring to the JOIN
 sections to translate the a, b, c, and d aliases into their actual table
-names. In small-ish queries such as this one, it&#8217;s not a huge deal, but
+names. In small-ish queries such as this one, it's not a huge deal, but
 when the queries start getting up to 50 or 100 lines, it becomes a real
 chore to track down each letter alias. Now look at the same query with
-just a few more&nbsp;keystrokes:</p>
+just a few more keystrokes:</p>
 <div class="highlight"><pre><span></span>SELECT plog.action,
        plog.tstamp,
        employee.fname,
@@ -114,11 +116,11 @@ ORDER BY approver.lname, approver.fname, plog.tstamp
 </pre></div>
 
 
-<p>So much nicer! You know right away that the third <span class="caps">SELECT</span> expression is
-the employee&#8217;s first name and that the first <span class="caps">ORDER</span> clause is the
-approver&#8217;s last&nbsp;name.</p>
-<p>An <span class="caps">SQL</span> alias is much like a variable name. The better the name, the
-easier it is to figure out what the code is trying to&nbsp;do.</p>	
+<p>So much nicer! You know right away that the third SELECT expression is
+the employee's first name and that the first ORDER clause is the
+approver's last name.</p>
+<p>An SQL alias is much like a variable name. The better the name, the
+easier it is to figure out what the code is trying to do.</p>	
 
 	</article>
 

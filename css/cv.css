@@ -15,8 +15,35 @@
     font-variant: small-caps;
 }
 
-.content h4.employer {
-    font-style: italic;
+.content .jobtitle {
+    float: left;
+}
+
+.content .period_location {
+    float: right;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+}
+
+.content .period_location .period {
+    margin-bottom: 0.2em;
+}
+
+.content .responsibilities {
+    clear: both;
+}
+
+.content .jobtitle {
+    margin-bottom: 0.5em;
+}
+
+.content .jobtitle h3 {
+    margin-bottom: 0.2em;
+}
+
+.content .employer {
+    text-decoration: none;
+    font-size: 1.05em;
     margin: 0.4em 0 0.5em 0;
 }
 
@@ -37,28 +64,8 @@
     padding-left: 0;
 }
 
-.content table.contact {
-    width: 100%;
-    margin-bottom: 1em;
-}
-
-.content table.jobtitle {
-    width: 100%;
-
-}
-
-.content table.jobtitle th, .content table.jobtitle td {
-    padding: 0;
-}
-
-.content table.jobtitle td.jobtitle {
-    font-size: 1.25em;
-    text-align: left;
-}
-
-.content table.jobtitle td.date {
-    font-size: 1.15em;
-    text-align: right;
+.content table.contact th {
+    width: 25%;
 }
 
 .content table.education {
@@ -75,4 +82,9 @@
 
 .content table.languages {
     width: 50%;
+}
+
+.content table.skills {
+    margin: 0 0 1em 0;
+    width: 75%;
 }

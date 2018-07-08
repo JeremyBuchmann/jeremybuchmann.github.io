@@ -86,5 +86,13 @@
 
 .content table.skills {
     margin: 0 0 1em 0;
-    width: 75%;
+}
+
+.content table.skills .skill {
+    width: 150px;
+}
+
+.content table.skills .experience {
+    width: 50px;
+    text-align: center;
 }

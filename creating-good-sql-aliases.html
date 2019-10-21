@@ -55,8 +55,8 @@
 that has been bugging me ever since I learned SQL (a good 10+ years
 ago): bad SQL aliases.  Let me start with some non-SQL code as an
 example.</p>
-<div class="highlight"><pre><span></span>int a, b;
-string c;
+<div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">string</span> <span class="k">c</span><span class="p">;</span>
 </pre></div>
 
 
@@ -64,29 +64,29 @@ string c;
 it was either exceptionally lazy or didn't know what they were doing. In
 this day and age, you expect good variable names, even if they're a bit
 long.</p>
-<div class="highlight"><pre><span></span>int numEmployees, selectedEmployeeId;
-string companyName;
+<div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">numEmployees</span><span class="p">,</span> <span class="n">selectedEmployeeId</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">companyName</span><span class="p">;</span>
 </pre></div>
 
 
 <p>Obviously, that's much better. So why do I keep seeing SQL queries that
 look like this:</p>
-<div class="highlight"><pre><span></span>SELECT a.action,
-       a.tstamp,
-       b.fname,
-       b.lname,
-       c.fname,
-       c.lname,
-       d.fname,
-       d.lname
-FROM personnel_log a
-  INNER JOIN users b ON a.target_id = b.id
-  INNER JOIN users c ON a.modifier_id = c.id
-  INNER JOIN users d ON a.approver_id = d.id
-WHERE a.tstamp &gt; &#39;2012-06-16 00:00:00 UTC&#39;::TIMESTAMP WITH TIME ZONE
-  AND c.lname ILIKE &#39;%smith%&#39;
-  AND b.fname ILIKE &#39;%James%&#39;
-ORDER BY d.lname, d.fname, a.tstamp
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">action</span><span class="p">,</span>
+       <span class="n">a</span><span class="p">.</span><span class="n">tstamp</span><span class="p">,</span>
+       <span class="n">b</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>
+       <span class="n">b</span><span class="p">.</span><span class="n">lname</span><span class="p">,</span>
+       <span class="k">c</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>
+       <span class="k">c</span><span class="p">.</span><span class="n">lname</span><span class="p">,</span>
+       <span class="n">d</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>
+       <span class="n">d</span><span class="p">.</span><span class="n">lname</span>
+<span class="k">FROM</span> <span class="n">personnel_log</span> <span class="n">a</span>
+  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">users</span> <span class="n">b</span> <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">target_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">users</span> <span class="k">c</span> <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">modifier_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">users</span> <span class="n">d</span> <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">approver_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">tstamp</span> <span class="o">&gt;</span> <span class="s1">&#39;2012-06-16 00:00:00 UTC&#39;</span><span class="p">::</span><span class="k">TIMESTAMP</span> <span class="k">WITH</span> <span class="n">TIME</span> <span class="k">ZONE</span>
+  <span class="k">AND</span> <span class="k">c</span><span class="p">.</span><span class="n">lname</span> <span class="k">ILIKE</span> <span class="s1">&#39;%smith%&#39;</span>
+  <span class="k">AND</span> <span class="n">b</span><span class="p">.</span><span class="n">fname</span> <span class="k">ILIKE</span> <span class="s1">&#39;%James%&#39;</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">d</span><span class="p">.</span><span class="n">lname</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">tstamp</span>
 </pre></div>
 
 
@@ -97,22 +97,22 @@ names. In small-ish queries such as this one, it's not a huge deal, but
 when the queries start getting up to 50 or 100 lines, it becomes a real
 chore to track down each letter alias. Now look at the same query with
 just a few more keystrokes:</p>
-<div class="highlight"><pre><span></span>SELECT plog.action,
-       plog.tstamp,
-       employee.fname,
-       employee.lname,
-       modder.fname,
-       modder.lname,
-       approver.fname,
-       approver.lname
-FROM personnel_log plog
-  INNER JOIN users employee ON plog.target_id = employee.id
-  INNER JOIN users modder ON plog.modifier_id = modder.id
-  INNER JOIN users approver ON plog.approver_id = approver.id
-WHERE plog.tstamp &gt; &#39;2012-06-16 00:00:00 UTC&#39;::TIMESTAMP WITH TIME ZONE
-  AND modder.lname ILIKE &#39;%smith%&#39;
-  AND employee.fname ILIKE &#39;%James%&#39;
-ORDER BY approver.lname, approver.fname, plog.tstamp
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">plog</span><span class="p">.</span><span class="n">action</span><span class="p">,</span>
+       <span class="n">plog</span><span class="p">.</span><span class="n">tstamp</span><span class="p">,</span>
+       <span class="n">employee</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>
+       <span class="n">employee</span><span class="p">.</span><span class="n">lname</span><span class="p">,</span>
+       <span class="n">modder</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>
+       <span class="n">modder</span><span class="p">.</span><span class="n">lname</span><span class="p">,</span>
+       <span class="n">approver</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>
+       <span class="n">approver</span><span class="p">.</span><span class="n">lname</span>
+<span class="k">FROM</span> <span class="n">personnel_log</span> <span class="n">plog</span>
+  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">users</span> <span class="n">employee</span> <span class="k">ON</span> <span class="n">plog</span><span class="p">.</span><span class="n">target_id</span> <span class="o">=</span> <span class="n">employee</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">users</span> <span class="n">modder</span> <span class="k">ON</span> <span class="n">plog</span><span class="p">.</span><span class="n">modifier_id</span> <span class="o">=</span> <span class="n">modder</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">users</span> <span class="n">approver</span> <span class="k">ON</span> <span class="n">plog</span><span class="p">.</span><span class="n">approver_id</span> <span class="o">=</span> <span class="n">approver</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">plog</span><span class="p">.</span><span class="n">tstamp</span> <span class="o">&gt;</span> <span class="s1">&#39;2012-06-16 00:00:00 UTC&#39;</span><span class="p">::</span><span class="k">TIMESTAMP</span> <span class="k">WITH</span> <span class="n">TIME</span> <span class="k">ZONE</span>
+  <span class="k">AND</span> <span class="n">modder</span><span class="p">.</span><span class="n">lname</span> <span class="k">ILIKE</span> <span class="s1">&#39;%smith%&#39;</span>
+  <span class="k">AND</span> <span class="n">employee</span><span class="p">.</span><span class="n">fname</span> <span class="k">ILIKE</span> <span class="s1">&#39;%James%&#39;</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">approver</span><span class="p">.</span><span class="n">lname</span><span class="p">,</span> <span class="n">approver</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span> <span class="n">plog</span><span class="p">.</span><span class="n">tstamp</span>
 </pre></div>
 
 
@@ -141,6 +141,7 @@ easier it is to figure out what the code is trying to do.</p>
   	          <nav>
                 <h2>Categories</h2>
                 <ul>
+                    <li ><a href="http://jeremybuchmann.com/category/beer.html">beer</a></li>
                     <li class="active"><a href="http://jeremybuchmann.com/category/development.html">development</a></li>
                     <li ><a href="http://jeremybuchmann.com/category/misc.html">misc</a></li>
                 </ul>

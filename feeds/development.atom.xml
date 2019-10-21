@@ -11,7 +11,7 @@
 &lt;/ul&gt;
 &lt;p&gt;and I remember the trainer, fully aware of how ridiculous this was, said "Now, this is kind of silly, but you need to pick the second CSV, not the first one, and not the new one. Just remember, choose the second CSV option if you want CSV."&lt;/p&gt;
 &lt;p&gt;Did someone green-light this into production? This was not some brand-new startup breaking things and moving fast. This was a multi-billion dollar enterprise software company. If this is what they put into production, what's their internal decision making like? What's their QA process?&lt;/p&gt;
-&lt;p&gt;As a developer, seeing things like this in production makes that workplace seem like a dumpster fire. So if you do things like this, don't be surprised if people don't want to work for you.&lt;/p&gt;</content></entry><entry><title>How to get PHP to authenticate with AD using LDAPS</title><link href="http://jeremybuchmann.com/how-to-get-php-to-authenticate-with-ad-using-ldaps.html" rel="alternate"></link><published>2016-03-16T21:43:00+01:00</published><updated>2016-03-16T21:43:00+01:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2016-03-16:/how-to-get-php-to-authenticate-with-ad-using-ldaps.html</id><summary type="html">&lt;p&gt;If you use Active Directory for authentication and also want to
+&lt;p&gt;As a developer, seeing things like this in production makes that workplace seem like a dumpster fire. So if you do things like this, don't be surprised if people don't want to work for you.&lt;/p&gt;</content><category term="development"></category></entry><entry><title>How to get PHP to authenticate with AD using LDAPS</title><link href="http://jeremybuchmann.com/how-to-get-php-to-authenticate-with-ad-using-ldaps.html" rel="alternate"></link><published>2016-03-16T21:43:00+01:00</published><updated>2016-03-16T21:43:00+01:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2016-03-16:/how-to-get-php-to-authenticate-with-ad-using-ldaps.html</id><summary type="html">&lt;p&gt;If you use Active Directory for authentication and also want to
 authenticate to it from PHP code, there are a few hoops to jump through,
 especially if you want to use LDAPS (LDAP over SSL/TLS). The clients
 accomplish this from PHP using the php-ldap library which uses the
@@ -33,7 +33,7 @@ the AD server.&lt;/p&gt;
 &lt;p&gt;One way is to tell OpenLDAP to not perform a check on the server’s
 certificate. To do this, you &lt;em&gt;could&lt;/em&gt; add this directive to
 &lt;code&gt;/etc/openldap/ldap.conf&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;TLS_REQCERT never # Don’t actually do this!
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;TLS_REQCERT&lt;/span&gt; &lt;span class="nv"&gt;never&lt;/span&gt; # &lt;span class="nv"&gt;Don&lt;/span&gt;’&lt;span class="nv"&gt;t&lt;/span&gt; &lt;span class="nv"&gt;actually&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;this&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -59,20 +59,20 @@ to be named in the form of HHHHHHHH.D, where each H is a hexadecimal
 character and D is a single decimal digit. There’s a script in the
 openssl-perl package called &lt;code&gt;c_rehash&lt;/code&gt; that creates symlinks in the
 right format for you. For example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[root@host]# c_rehash /etc/openldap/certs
-Doing /etc/openldap/certs
-host-ca.pem =&amp;gt; 4d86282a.0
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;root@host&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;c_rehash&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openldap&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Doing&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openldap&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="k"&gt;host&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ca&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="n"&gt;d86282a&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Once you have the PEM files and the symlinks in the right place, the AD
 authentication in your PHP script should work.&lt;/p&gt;
 &lt;p&gt;Note: the c_rehash script is really doing:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[root@host]# openssl x509 -hash -fingerprint -noout -in file.pem
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;root@host&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;openssl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;x509&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fingerprint&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;noout&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and taking the first line of output to create the hash file name.&lt;/p&gt;</content></entry><entry><title>Five Tools Every Programmer Should Have (that aren't on a computer)</title><link href="http://jeremybuchmann.com/five-tools-every-programmer-should-have-that-arent-on-a-computer.html" rel="alternate"></link><published>2012-06-20T15:35:00+02:00</published><updated>2012-06-20T15:35:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-20:/five-tools-every-programmer-should-have-that-arent-on-a-computer.html</id><summary type="html">&lt;h3&gt;1. Nail Clippers&lt;/h3&gt;
+&lt;p&gt;and taking the first line of output to create the hash file name.&lt;/p&gt;</content><category term="development"></category></entry><entry><title>Five Tools Every Programmer Should Have (that aren't on a computer)</title><link href="http://jeremybuchmann.com/five-tools-every-programmer-should-have-that-arent-on-a-computer.html" rel="alternate"></link><published>2012-06-20T15:35:00+02:00</published><updated>2012-06-20T15:35:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-20:/five-tools-every-programmer-should-have-that-arent-on-a-computer.html</id><summary type="html">&lt;h3&gt;1. Nail Clippers&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="nail clippers" src="http://jeremybuchmann.com/images/nail-clippers.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;I have a confession to make. I can't type. Never learned. Most
 programmers I've known couldn't type either, which is weird. You'd think
@@ -138,12 +138,12 @@ man-cave, but for nerds...BTW, how great of a show would that be...are
 you listening HGTV?), you may want to look into a little houseplant. Any
 old plant will do, but did you know that there are plants that are
 especially good at cleaning the air? &lt;a href="http://www.extension.umn.edu/yardandgarden/ygbriefs/h110indoorair.html"&gt;It's
-true&lt;/a&gt;.&lt;/p&gt;</content></entry><entry><title>Creating Good SQL Aliases</title><link href="http://jeremybuchmann.com/creating-good-sql-aliases.html" rel="alternate"></link><published>2012-06-16T21:15:00+02:00</published><updated>2012-06-16T21:15:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-16:/creating-good-sql-aliases.html</id><summary type="html">&lt;p&gt;I was reviewing someone else's code the other day and noticed something
+true&lt;/a&gt;.&lt;/p&gt;</content><category term="development"></category></entry><entry><title>Creating Good SQL Aliases</title><link href="http://jeremybuchmann.com/creating-good-sql-aliases.html" rel="alternate"></link><published>2012-06-16T21:15:00+02:00</published><updated>2012-06-16T21:15:00+02:00</updated><author><name>Jeremy Buchmann</name></author><id>tag:jeremybuchmann.com,2012-06-16:/creating-good-sql-aliases.html</id><summary type="html">&lt;p&gt;I was reviewing someone else's code the other day and noticed something
 that has been bugging me ever since I learned SQL (a good 10+ years
 ago): bad SQL aliases.  Let me start with some non-SQL code as an
 example.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;int a, b;
-string c;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -151,8 +151,8 @@ string c;
 that has been bugging me ever since I learned SQL (a good 10+ years
 ago): bad SQL aliases.  Let me start with some non-SQL code as an
 example.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;int a, b;
-string c;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -160,29 +160,29 @@ string c;
 it was either exceptionally lazy or didn't know what they were doing. In
 this day and age, you expect good variable names, even if they're a bit
 long.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;int numEmployees, selectedEmployeeId;
-string companyName;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="n"&gt;numEmployees&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;selectedEmployeeId&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;companyName&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Obviously, that's much better. So why do I keep seeing SQL queries that
 look like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SELECT a.action,
-       a.tstamp,
-       b.fname,
-       b.lname,
-       c.fname,
-       c.lname,
-       d.fname,
-       d.lname
-FROM personnel_log a
-  INNER JOIN users b ON a.target_id = b.id
-  INNER JOIN users c ON a.modifier_id = c.id
-  INNER JOIN users d ON a.approver_id = d.id
-WHERE a.tstamp &amp;gt; &amp;#39;2012-06-16 00:00:00 UTC&amp;#39;::TIMESTAMP WITH TIME ZONE
-  AND c.lname ILIKE &amp;#39;%smith%&amp;#39;
-  AND b.fname ILIKE &amp;#39;%James%&amp;#39;
-ORDER BY d.lname, d.fname, a.tstamp
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tstamp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;personnel_log&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+  &lt;span class="k"&gt;INNER&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;target_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+  &lt;span class="k"&gt;INNER&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;modifier_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+  &lt;span class="k"&gt;INNER&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;approver_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tstamp&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2012-06-16 00:00:00 UTC&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="k"&gt;TIMESTAMP&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;TIME&lt;/span&gt; &lt;span class="k"&gt;ZONE&lt;/span&gt;
+  &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt; &lt;span class="k"&gt;ILIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%smith%&amp;#39;&lt;/span&gt;
+  &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt; &lt;span class="k"&gt;ILIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%James%&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tstamp&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -193,22 +193,22 @@ names. In small-ish queries such as this one, it's not a huge deal, but
 when the queries start getting up to 50 or 100 lines, it becomes a real
 chore to track down each letter alias. Now look at the same query with
 just a few more keystrokes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SELECT plog.action,
-       plog.tstamp,
-       employee.fname,
-       employee.lname,
-       modder.fname,
-       modder.lname,
-       approver.fname,
-       approver.lname
-FROM personnel_log plog
-  INNER JOIN users employee ON plog.target_id = employee.id
-  INNER JOIN users modder ON plog.modifier_id = modder.id
-  INNER JOIN users approver ON plog.approver_id = approver.id
-WHERE plog.tstamp &amp;gt; &amp;#39;2012-06-16 00:00:00 UTC&amp;#39;::TIMESTAMP WITH TIME ZONE
-  AND modder.lname ILIKE &amp;#39;%smith%&amp;#39;
-  AND employee.fname ILIKE &amp;#39;%James%&amp;#39;
-ORDER BY approver.lname, approver.fname, plog.tstamp
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;plog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;plog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tstamp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;employee&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;employee&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;modder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;modder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;approver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;approver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;personnel_log&lt;/span&gt; &lt;span class="n"&gt;plog&lt;/span&gt;
+  &lt;span class="k"&gt;INNER&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="n"&gt;employee&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;plog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;target_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;employee&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+  &lt;span class="k"&gt;INNER&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="n"&gt;modder&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;plog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;modifier_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;modder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+  &lt;span class="k"&gt;INNER&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="n"&gt;approver&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;plog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;approver_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;approver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;plog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tstamp&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2012-06-16 00:00:00 UTC&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="k"&gt;TIMESTAMP&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;TIME&lt;/span&gt; &lt;span class="k"&gt;ZONE&lt;/span&gt;
+  &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;modder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt; &lt;span class="k"&gt;ILIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%smith%&amp;#39;&lt;/span&gt;
+  &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;employee&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt; &lt;span class="k"&gt;ILIKE&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%James%&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;approver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;approver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tstamp&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -216,4 +216,4 @@ ORDER BY approver.lname, approver.fname, plog.tstamp
 the employee's first name and that the first ORDER clause is the
 approver's last name.&lt;/p&gt;
 &lt;p&gt;An SQL alias is much like a variable name. The better the name, the
-easier it is to figure out what the code is trying to do.&lt;/p&gt;</content></entry></feed>
+easier it is to figure out what the code is trying to do.&lt;/p&gt;</content><category term="development"></category></entry></feed>

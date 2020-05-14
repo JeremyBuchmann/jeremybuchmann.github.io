@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Unit Testing a File Upload in Laravel - Jeremy Buchmann</title>
+    <meta name="author" content="Jeremy Buchmann">
+
+
+  <meta name="description" content="use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile; use Illuminate\Http\UploadedFile as IlluminateUploadedFile; class MediaTest extends TestCase { private $photoFile = DIR . '/assets/img/park.png'; public function testUploadPhoto() { $data = [ 'userId' => 1, 'caption' => 'me and my best friend', 'location' => 'the park' ]; $fileStats = stat($this->photoFile); $mimeType = mime_content_type($this->photoFile); $pathInfo = pathinfo …">
+
+	<meta name="twitter:card" content="summary">
+	  <meta name="twitter:creator" content="@jeremybuchmann">
+	<meta name="twitter:title" content="Unit Testing a File Upload in Laravel">
+	<meta name="twitter:description" content="use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile; use Illuminate\Http\UploadedFile as IlluminateUploadedFile; class MediaTest extends TestCase { private $photoFile = DIR . '/assets/img/park.png'; public function testUploadPhoto() { $data = [ 'userId' => 1, 'caption' => 'me and my best friend', 'location' => 'the park' ]; $fileStats = stat($this->photoFile); $mimeType = mime_content_type($this->photoFile); $pathInfo = pathinfo …">
+	<meta name="twitter:url" content="../drafts/unit-test-file-upload-laravel.html">
+
+
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+
+
+
+</head>
+
+<body>
+
+    <div class="container">
+
+      <header>
+        <div class="feeds">
+        </div>
+          <nav class="pages">
+              <a href="../pages/about-me.html">About Me</a>
+-              <a href="../pages/curriculum-vitae.html">Curriculum Vitae</a>
+          </nav>
+    <a href=".." class="title">Jeremy Buchmann</a>
+      </header>
+
+      <div class="wrapper">
+
+      <div role="main" class="content">
+	<article class="full">
+		
+		<h1>Unit Testing a File Upload in Laravel</h1>
+		
+<div class="metadata">
+  <time datetime="2019-03-15T17:02:00+01:00">Mar 15, 2019</time>
+    <address class="vcard author">
+      by <a class="url fn" href="../author/jeremy-buchmann.html">Jeremy Buchmann</a>
+    </address>
+  in <a href="../category/development.html">development</a>
+</div>		
+		<p>use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
+use Illuminate\Http\UploadedFile as IlluminateUploadedFile;</p>
+<p>class MediaTest extends TestCase
+{
+    private $photoFile = <strong>DIR</strong> . '/assets/img/park.png';</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">function</span> <span class="n">testUploadPhoto</span><span class="p">()</span>
+<span class="err">{</span>
+    <span class="err">$</span><span class="k">data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;userId&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;caption&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;me and my best friend&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;location&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;the park&#39;</span>
+    <span class="p">];</span>
+
+    <span class="err">$</span><span class="n">fileStats</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="err">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">photoFile</span><span class="p">);</span>
+    <span class="err">$</span><span class="n">mimeType</span> <span class="o">=</span> <span class="n">mime_content_type</span><span class="p">(</span><span class="err">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">photoFile</span><span class="p">);</span>
+    <span class="err">$</span><span class="n">pathInfo</span> <span class="o">=</span> <span class="n">pathinfo</span><span class="p">(</span><span class="err">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">photoFile</span><span class="p">);</span>
+
+    <span class="err">$</span><span class="n">fileData</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;media&#39;</span> <span class="o">=&gt;</span> <span class="n">IlluminateUploadedFile</span><span class="p">::</span><span class="n">createFromBase</span><span class="p">(</span>
+            <span class="k">new</span> <span class="n">SymfonyUploadedFile</span><span class="p">(</span>
+                <span class="err">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">photoFile</span><span class="p">,</span>
+                <span class="err">$</span><span class="n">pathInfo</span><span class="p">[</span><span class="s1">&#39;basename&#39;</span><span class="p">],</span>
+                <span class="err">$</span><span class="n">mimeType</span><span class="p">,</span>
+                <span class="err">$</span><span class="n">fileStats</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">],</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="k">true</span>
+            <span class="p">),</span>
+            <span class="k">true</span>
+        <span class="p">)</span>
+    <span class="p">];</span>
+
+    <span class="err">$</span><span class="n">response</span> <span class="o">=</span> <span class="err">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">withoutMiddleware</span><span class="p">()</span><span class="o">-&gt;</span><span class="k">call</span><span class="p">(</span>
+        <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/media&#39;</span><span class="p">,</span>
+        <span class="err">$</span><span class="k">data</span><span class="p">,</span>
+        <span class="p">[],</span>
+        <span class="err">$</span><span class="n">fileData</span><span class="p">,</span>
+        <span class="p">[]</span>
+    <span class="p">);</span>
+
+    <span class="err">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">shouldReturnJson</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">assertResponseOk</span><span class="p">();</span>
+
+    <span class="o">//</span> <span class="k">Do</span> <span class="n">other</span> <span class="n">assertions</span> <span class="k">with</span> <span class="n">the</span> <span class="n">response</span>
+<span class="err">}</span>
+</code></pre></div>
+
+
+<p>}</p>	
+
+	</article>
+
+
+
+      </div>
+
+      <div class="sidebar">
+        <div class="sidebar-container" >
+
+                <aside>
+                  <h2>About</h2>
+          <p>
+                    This is the website of Jeremy Buchmann, a Web developer in Eindhoven, Netherlands.
+          </p>
+        </aside>
+
+  	          <nav>
+                <h2>Categories</h2>
+                <ul>
+                    <li ><a href="../category/beer.html">beer</a></li>
+                    <li class="active"><a href="../category/development.html">development</a></li>
+                    <li ><a href="../category/misc.html">misc</a></li>
+                </ul>
+              </nav>
+
+                <aside>
+                <h2>Social</h2>
+          <ul class="social">
+        <li><a href="https://twitter.com/jeremybuchmann">Twitter</a><i></i></li>
+        <li><a href="https://www.linkedin.com/in/jeremybuchmann">LinkedIn</a><i></i></li>
+        <li><a href="https://github.com/JeremyBuchmann">Github</a><i></i></li>
+          </ul>
+        </aside>
+
+                <aside>
+                  <h2>Foundation</h2>
+                  <ul>
+                      <li><a href="https://www.eindhoven.nl/">Live</a></li>
+                      <li><a href="https://laurawetherington.com">Love</a></li>
+                      <li><a href="https://www.coosto.com">Work</a></li>
+                  </ul>
+                </aside>
+            </div>
+      </div>
+
+      </div>
+
+      <footer>
+    <p role="contentinfo">
+      Copyright &copy; Jeremy Buchmann 2012-2018
+    </p>
+
+      </footer>
+
+    </div>
+</body>
+</html>

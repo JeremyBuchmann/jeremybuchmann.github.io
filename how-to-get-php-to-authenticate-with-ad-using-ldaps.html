@@ -12,14 +12,13 @@
 	  <meta name="twitter:creator" content="@jeremybuchmann">
 	<meta name="twitter:title" content="How to get PHP to authenticate with AD using LDAPS">
 	<meta name="twitter:description" content="If you use Active Directory for authentication and also want to authenticate to it from PHP code, there are a few hoops to jump through, especially if you want to use LDAPS (LDAP over SSL/TLS). The clients accomplish this from PHP using the php-ldap library which uses the OpenLDAP …">
-	<meta name="twitter:url" content="http://jeremybuchmann.com/how-to-get-php-to-authenticate-with-ad-using-ldaps.html">
+	<meta name="twitter:url" content="./how-to-get-php-to-authenticate-with-ad-using-ldaps.html">
 
 
-    <link rel="stylesheet" href="http://jeremybuchmann.com/theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
 
 
 
-    <link href="http://jeremybuchmann.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeremy Buchmann Atom Feed" />
 </head>
 
 <body>
@@ -28,13 +27,12 @@
 
       <header>
         <div class="feeds">
-          <a href="http://jeremybuchmann.com/feeds/all.atom.xml" rel="alternate"><img src="http://jeremybuchmann.com/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
         </div>
           <nav class="pages">
-              <a href="http://jeremybuchmann.com/pages/about-me.html">About Me</a>
--              <a href="http://jeremybuchmann.com/pages/curriculum-vitae.html">Curriculum Vitae</a>
+              <a href="./pages/about-me.html">About Me</a>
+-              <a href="./pages/curriculum-vitae.html">Curriculum Vitae</a>
           </nav>
-    <a href="http://jeremybuchmann.com" class="title">Jeremy Buchmann</a>
+    <a href="." class="title">Jeremy Buchmann</a>
       </header>
 
       <div class="wrapper">
@@ -47,9 +45,9 @@
 <div class="metadata">
   <time datetime="2016-03-16T21:43:00+01:00">Mar 16, 2016</time>
     <address class="vcard author">
-      by <a class="url fn" href="http://jeremybuchmann.com/author/jeremy-buchmann.html">Jeremy Buchmann</a>
+      by <a class="url fn" href="./author/jeremy-buchmann.html">Jeremy Buchmann</a>
     </address>
-  in <a href="http://jeremybuchmann.com/category/development.html">development</a>
+  in <a href="./category/development.html">development</a>
 </div>		
 		<p>If you use Active Directory for authentication and also want to
 authenticate to it from PHP code, there are a few hoops to jump through,
@@ -69,8 +67,8 @@ the AD server.</p>
 <p>One way is to tell OpenLDAP to not perform a check on the server’s
 certificate. To do this, you <em>could</em> add this directive to
 <code>/etc/openldap/ldap.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="nv">TLS_REQCERT</span> <span class="nv">never</span> # <span class="nv">Don</span>’<span class="nv">t</span> <span class="nv">actually</span> <span class="k">do</span> <span class="nv">this</span><span class="o">!</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>TLS_REQCERT never # Don’t actually do this!
+</code></pre></div>
 
 
 <p>But as the <a href="http://www.openldap.org/doc/admin24/tls.html#Client%20Configuration">OpenLDAP manual
@@ -95,17 +93,17 @@ to be named in the form of HHHHHHHH.D, where each H is a hexadecimal
 character and D is a single decimal digit. There’s a script in the
 openssl-perl package called <code>c_rehash</code> that creates symlinks in the
 right format for you. For example:</p>
-<div class="highlight"><pre><span></span><span class="o">[</span><span class="n">root@host</span><span class="o">]</span><span class="err">#</span><span class="w"> </span><span class="n">c_rehash</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openldap</span><span class="o">/</span><span class="n">certs</span><span class="w"></span>
-<span class="n">Doing</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openldap</span><span class="o">/</span><span class="n">certs</span><span class="w"></span>
-<span class="k">host</span><span class="o">-</span><span class="n">ca</span><span class="p">.</span><span class="n">pem</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">4</span><span class="n">d86282a</span><span class="mf">.0</span><span class="w"></span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>[root@host]# c_rehash /etc/openldap/certs
+Doing /etc/openldap/certs
+host-ca.pem =&gt; 4d86282a.0
+</code></pre></div>
 
 
 <p>Once you have the PEM files and the symlinks in the right place, the AD
 authentication in your PHP script should work.</p>
 <p>Note: the c_rehash script is really doing:</p>
-<div class="highlight"><pre><span></span><span class="o">[</span><span class="n">root@host</span><span class="o">]</span><span class="err">#</span><span class="w"> </span><span class="n">openssl</span><span class="w"> </span><span class="n">x509</span><span class="w"> </span><span class="o">-</span><span class="n">hash</span><span class="w"> </span><span class="o">-</span><span class="n">fingerprint</span><span class="w"> </span><span class="o">-</span><span class="n">noout</span><span class="w"> </span><span class="o">-</span><span class="ow">in</span><span class="w"> </span><span class="k">file</span><span class="p">.</span><span class="n">pem</span><span class="w"></span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>[root@host]# openssl x509 -hash -fingerprint -noout -in file.pem
+</code></pre></div>
 
 
 <p>and taking the first line of output to create the hash file name.</p>	
@@ -129,9 +127,9 @@ authentication in your PHP script should work.</p>
   	          <nav>
                 <h2>Categories</h2>
                 <ul>
-                    <li ><a href="http://jeremybuchmann.com/category/beer.html">beer</a></li>
-                    <li class="active"><a href="http://jeremybuchmann.com/category/development.html">development</a></li>
-                    <li ><a href="http://jeremybuchmann.com/category/misc.html">misc</a></li>
+                    <li ><a href="./category/beer.html">beer</a></li>
+                    <li class="active"><a href="./category/development.html">development</a></li>
+                    <li ><a href="./category/misc.html">misc</a></li>
                 </ul>
               </nav>
 

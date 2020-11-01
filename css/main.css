@@ -475,12 +475,13 @@ body > footer {
 }
 
 section.cards {
-	display: flex
+	display: flex;
+	flex-wrap: wrap;
 }
 
 section.cards article {
 	/* border: 1px solid var(--nc-bg-3); */
-	width: 140px;
+	width: 120px;
 	height: 150px;
 	margin: 5px;
 	padding: 5px;

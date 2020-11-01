@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jeremy Buchmann">
+  <title>Jeremy Buchmann | Development Process</title>
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header>
+    <h1>Jeremy Buchmann</h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="contact.html">Contact</a>
+        </li>
+        <li>Development Process</li>
+        <li>
+          <a href="statement_of_experience.html">Statement of Experience</a>
+        </li>
+        <li>
+          <a href="cv.html">CV / Resume</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Development Process</h1>
+    <p>After 20 years as a professional developer on teams and as a lone wolf, I've learned some
+    things about the process of developing software. These are my insights and opinions about the
+    stuff that happens mostly outside a code editor.</p>
+    <h2>Composition of Teams</h2>
+    <ul>
+      <li>
+        <h5>Mix of Experience and Inexperience</h5>
+        <p>A mix of experienced and inexperienced members on a team provides several nice
+        benefits:</p>
+        <ul>
+          <li>The less-experienced members can learn the tricks of the trade from the more
+          experienced members.</li>
+          <li>The more experienced members can also learn from the less-experienced members. New
+          developers have often been trained in newer tooling and techniques that weren't around
+          when older members were in school. New developers can also prevent ossification by
+          questioning established norms and providing fresh ideas.</li>
+        </ul>
+      </li>
+      <li>
+        <h5>Mix of Backgrounds</h5>
+        <p>A mix of backgrounds such as having team members with experience in different
+        industries, tech stacks, and from different countries lends a variety of perspectives and
+        approaches for problem solving.</p>
+      </li>
+    </ul>
+    <h2>Team Leadership</h2>
+    <p>Some sort of team leadership, typically in the form of a tech lead or engineering manager,
+    is a real asset. The most important duty for a team leader is to clear roadblocks for the
+    team.</p>
+    <blockquote>
+      <p>A manager's job is not to make people work, it's to make it possible for people to
+      work.</p>
+      <footer>
+        —Tom DeMarco and Tim Lister, <cite>Peopleware: Productive Projects and Teams</cite>
+      </footer>
+    </blockquote>
+    <ul>
+      <li>
+        <h5>Decision Making</h5>
+        <p>There are entire books about the dynamics and process of group decision making, but in
+        the most common cases, you want the team to make decisions that everyone is at least
+        comfortable with. The job of a team leader is to ensure that everyone has a chance to offer
+        their opinion and to move the discussion to a conclusion at a speed that doesn't feel
+        rushed, but also doesn't feel tedious and repetitive.</p>
+      </li>
+      <li>
+        <h5>Keep the Team Focused on the Goals</h5>
+        <p>It's common for "side-work" to creep into a sprint, like when Marketing asks for usage
+        stats of the new feature your team released last week or when Customer Support asks
+        developers directly to look into some problem for a customer. Doing these things once in a
+        while is okay if they're easy tasks, but if they get too frequent or too complex, a team
+        leader should step in and keep the team on track.</p>
+      </li>
+      <li>
+        <h5>Increase Communication</h5>
+        <p>In a multi-team situation, it can be difficult for teams to communicate effectively with
+        each other due to <a href="https://en.wikipedia.org/wiki/Diffusion_of_responsibility"
+        target="_blank">diffusion of responsibility</a>, employee absences, or just forgetfulness.
+        A team leader should keep tabs of ongoing dependencies between teams and keep the lines of
+        communication open.</p>
+      </li>
+      <li>
+        <h5>Make Technical Debt Visible</h5>
+        <p>It's easy to lose track of how much tech debt you have and how long it will take to pay
+        back. I like the idea of a <a href="https://verraes.net/2020/01/wall-of-technical-debt/"
+        target="_blank">technical debt wall</a>, but any kind of tracking or visualization is
+        better than nothing.</p>
+      </li>
+      <li>
+        <h5>Reduce Stress</h5>
+        <p>Taking stress off the team is one of the best and most appreciated things a manager can
+        do. That doesn't mean that conflicts or bad news should be hidden from the team, but the
+        team should be sheltered from the intensity. In other words, the manager should let in the
+        light, but block the heat.</p>
+        <blockquote>
+          <p>Stress is one of the leading causes of legacy code. Stress affects how code is scoped,
+          estimated and written. Higher stress reduces consideration of edge cases, quality of code
+          written, and tests provided.</p>
+          <footer>
+            —Brandon Savage, <cite><a href=
+            "https://twitter.com/ModernizingPHP/status/1214568248815104000" target=
+            "_blank">@ModernizingPHP, Jan 7, 2020</a></cite>
+          </footer>
+        </blockquote>
+      </li>
+    </ul>
+    <h2>Planning and Executing Sprints</h2>
+    <ul>
+      <li>
+        <h5>Goals</h5>
+        <p>Making a clear and accomplishable goal is the most important step when planning a
+        sprint. The goal should be something definitive, like "release new video feature to
+        internal stakeholders" or "improve performance of import module by at least 20%". It should
+        not be something like "finish 50% of the development of the new video feature".</p>
+        <p>It's easy for the goal of a sprint to become burning points instead of accomplishing a
+        well-defined goal. Burning points is fine, but no customer is going to buy your product
+        because the dev team burned 52 points last sprint.</p>
+      </li>
+      <li>
+        <h5>Estimations</h5>
+        <p>The longer estimations sit around, the less useful they become, and eventually you have
+        to estimate all over again. Estimations should be done at the last possible moment; when
+        you have the most information and are in the right frame of mind. I can't stress this
+        enough.</p>
+      </li>
+      <li>
+        <h5>Minimize WIP</h5>
+        <p>It's easy to fall into the trap of starting too much work. You finish one task, put the
+        pull request for review, and then start another task. Then you get blocked because you have
+        to wait for someone else to make last-minute design changes, so you decide to start a third
+        thing. Before you know it, your five-developer team has 15 tasks in progress and is spread
+        too thin and wastes too much time task switching. To finish work faster, focus on finishing
+        the tasks that are open before moving on to the next one. Be ruthless about clearing
+        roadblocks so your tasks can be finished.</p>
+      </li>
+      <li>
+        <h5>Iterations</h5>
+        <p>Ask each team member to keep track of iteration ideas during the development of the
+        feature and list them in the feature retro. Oh, and do feature retros :-)</p>
+      </li>
+    </ul>
+    <h2>Minimum Viable Product (MVP)</h2>
+    <ul>
+      <li>
+        <h5>The Pizza Analogy</h5>
+        <p>I like to say that an MVP should be like a good cheese pizza. A cheese pizza is the
+        minimum thing that you can call a pizza. If all you have is a crust, it's not a pizza and
+        no one is going to buy it. But a well-made cheese pizza is good, and many people will
+        happily eat it. The key is that it has to be a complete pizza, and it has to be well-made.
+        No one wants a burned pizza, or a pizza with bad ingredients.</p>
+        <p>Once you have a good cheese pizza, you can add extra toppings. This is where you decide
+        whether your product is going to be a veggie combo, a Hawaiian, or a BBQ chicken. That's
+        more about product market fit than engineering, and I can't really give advice on that, but
+        I strongly recommend that you don't try to make an "everything to everyone" product. Even
+        though pizza places give you 20-30 possible toppings, they don't offer <em>all</em> those
+        toppings on one pizza. Too many toppings on the pizza makes it an inedible mess. Similarly,
+        a product with too many features and options is a pain to use and ends up being good at
+        nothing.</p>
+      </li>
+    </ul>
+    <h2>Testing</h2>
+    <p>Automated tests give you three big benefits:</p>
+    <ol>
+      <li>They help to clarify the requirements.</li>
+      <li>They clarify your thinking about your code.</li>
+      <li>They give you the freedom to make changes to your code and find out very quickly if you
+      broke something.</li>
+    </ol>
+    <p>Tests should encode the functional requirements of the system. If you make changes and a
+    test fails, you know that either the change broke a functional requirement or the test needs to
+    be updated to a new functional requirement. Writing tests is an investment that pays off with
+    faster and safer changes in the future.</p>
+    <ul>
+      <li>
+        <h5>Unit vs. Integration vs. End-to-end</h5>
+        <p>Ideally, all your code would have a full suite of unit, integration, and end-to-end
+        tests, but that's not something I commonly see. If you have to pick one or the other due to
+        time constraints, I prefer end-to-end tests because what matters most is the output you get
+        given some input. That's not a reason to not have or not maintain unit tests—my preference
+        is to have a mix of both—but I still prefer end-to-end tests as long as they don't take too
+        long to run.</p>
+      </li>
+      <li>
+        <h5>0, 1, Many</h5>
+        <p>One of my favorite testing sequences for either automated or manual tests is 0, 1, Many.
+        The basic idea is that for anything that accepts or displays a list of data, you provide a
+        list of 0 items, 1 item, and many items. For text fields, this translates to something like
+        an empty string, a single character (a space is a good one), and a ton of text. This
+        exposes lots of UI issues related to an app's text, empty states, and pagination
+        capabilities as well as backend issues related to input validation and even database
+        calls.</p>
+      </li>
+    </ul>
+    <h2>Documentation</h2>
+    <p>I'm one of the few software engineers that doesn't mind writing documentation. I love clear,
+    concise writing by itself, but I also like what the process of writing gives me. It gives me
+    the opportunity to think about the problem in a different way by forcing me to explain my ideas
+    and solutions in human language. It forces me to clarify the problem which often leads to more
+    information gathering and better-targeted solutions. It forces me to evaluate my solution from
+    a different perspective. In a way, it's like writing unit tests. It surfaces problems before
+    they get farther down the development pipeline.</p>
+    <p>All that being said, I don't disparage anyone who says they hate writing documentation.
+    There's usually a good reason for it. Documentation is often written and never read, and the
+    writer knows it. There are lots of benefits to having good documentation, but few companies try
+    to take advantage of those benefits.</p>
+    <ul>
+      <li>
+        <h5>Clarified Thinking</h5>
+        <p>Writing documentation forces you to explain the problem and solution in human language
+        which clarifies both.</p>
+      </li>
+      <li>
+        <h5>Easier on-boarding</h5>
+        <p>When a new employee joins the team, they have a place to go that explains what they need
+        to know to get going quickly. Up-to-date documentaion is a heck of a lot nicer than "just
+        read the code and ask questions". Looking at any new non-trivial code base is daunting for
+        anyone, and no one likes to ask 1,000 questions on their first day.</p>
+      </li>
+      <li>
+        <h5>Standardization</h5>
+        <p>Creating documentation helps a development team identify and decide on standards (like
+        code style, version control, which libraries or databases are used for a certain purpose)
+        and processes (like branching, code reviewing, and releasing).</p>
+      </li>
+      <li>
+        <h5>Record keeping</h5>
+        <p>If your documentation explains not just what, but <em>why</em> a certain idea was
+        proposed or decided, it helps you make better decisions. For example, let's say that you
+        have an application that uses MySQL, but when you look at the current requirements of the
+        application, it seems like MongoDB would be a better choice. If there was documentation
+        that explained the reasoning behind the choice of MySQL, you might find that there was a
+        very good reason that you hadn't thought of. Or conversly, you might find there was no
+        reason at all aside from familiarity and that MongoDB would have been a better choice. It
+        may also be that the requirements and assumptions were different in the past. But if all
+        the authors have moved on, you wouldn't know without the documentation.</p>
+      </li>
+    </ul>
+    <p>I can't tell you what kind of documentation to write, how to store it, or even how to use
+    it; that's very company- and industry-specific. But if you want to get the benefits of
+    documentation, you need to make <em>reading</em> documenation part of your development process.
+    A simple rule of thumb is, whatever gets written needs to be read. If no one is ever going to
+    read it, don't write it! (Unless you're just writing it for clarification purposes). For the
+    stuff you write, create some process that ensures the documentation is read and updated
+    regularly. For example, take a couple hours a week and make it documentation time. If you use a
+    wiki, you can have all developers go to five random wiki pages and read them. If they're not
+    up-to-date or not complete, fix them. You can even gamify the process. Give out prizes for most
+    lines edited, "best" edits, or just for a random edit to encourage people who don't like
+    writing.</p>
+    <h2>Usage Data</h2>
+    <p>Usage data in this instance means UI telemetry data (button clicks, mouse hovers, etc) as
+    well as statistics from your database. This data tells you how users are using your
+    product.</p>
+    <ul>
+      <li>
+        <h5>How Much to Gather</h5>
+        <p>Gather a reasonable amount of usage data, but don't go crazy. Of course it's good to
+        know how users are using your app, and you should invest some time into making that data
+        easy to access and visualize. However, spending too much time gathering and analyzing data
+        can lead to tunnel-vision where you obsess about minor details at the expense of the big
+        picture.</p>
+      </li>
+    </ul>
+    <h2>Logging and Monitoring</h2>
+    <p>First, let me make a distinction between three things:</p>
+    <ol>
+      <li><strong>Error reporting</strong> provides details of any unhandled exceptions or
+      unhandle-able conditions. Commonly implemented with third-party services like Rollbar,
+      Raygun, and Sentry.</li>
+      <li><strong>Logging</strong> provides operational information and warnings. Commonly
+      implemented with syslog, the ELK stack, and Splunk.</li>
+      <li><strong>Monitoring</strong> provides an overview of operational conditions and
+      statistics. Commonly implemented with Grafana and Datadog.</li>
+    </ol>
+    <p>You should iterate on error reporting, logging, and monitoring just like any other part of a
+    feature. Have every developer, site reliability engineer, support person, etc, look at the
+    error reporting, logging, and monitoring for new releases and ask them to suggest improvements.
+    You'll be really happy that you have good logging and monitoring when you're trying to track
+    down a bug or a performance problem.</p>
+    <h2>Physical Environment</h2>
+    <p>There's a whole section (7 chapters) on this subject in the classic software development
+    book <a href="https://en.wikipedia.org/wiki/Peopleware:_Productive_Projects_and_Teams" target=
+    "_blank">Peopleware</a>. I'm not going to repeat what they say, but you should read it if you
+    haven't; I'll add my two cents on a few specific topics.</p>
+    <ul>
+      <li>
+        <h5>Your desk: Sit vs. stand</h5>
+        <p>Do both if possible. That means that if you have an adjustable standing desk, stand for
+        some amount of time and then adjust it down and sit for some amount of time. Switch back
+        and forth throughout the day.</p>
+      </li>
+      <li>
+        <h5>Monitors</h5>
+        <p>I've used two 24" monitors at their native resolution for a long time, but recently I
+        tried running a 4k monitor and running at 200% scaling and it's been a huge improvement in
+        the way I see things on my computer. It's really hard to go back to lower pixel density
+        screens.</p>
+      </li>
+      <li>
+        <h5>Noise-canceling headphones</h5>
+        <p>These are moderately useful, but they're not a savior for a bad office environment. They
+        can only block a certain amount of noise and can be uncomfortable to wear for long periods.
+        They really pay off if they have an equally good microphone and you have to do a lot of
+        video calls. I recommend them for <em>all</em> members of a team with remote workers.</p>
+      </li>
+    </ul>
+  </main>
+  <footer>
+    <p>Copyright © Jeremy Buchmann 2012-2020</p>
+    <hr>
+  </footer>
+</body>
+</html>

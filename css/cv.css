@@ -1,98 +1,138 @@
-
-.content h2 {
-    margin: 1em 0 0.2em 0;
+html {
+    background-color: white;
 }
 
-.content hr {
-    margin: 0 1em 0.75em 0;
+body {
+	background-color: #F4F2F6;
+    font-family: 'Open Sans', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 14px;
+	margin: 0 auto 0 auto;
+	padding: 2px;
+	width: 794px;
+	border: 1px solid #bbb;
 }
 
-.content .caps {
-    font-variant: normal;
+header {
+    border-bottom: 3px double #9BA0A4;
+    text-align: center;
 }
 
-.content h2 .caps {
-    font-variant: small-caps;
-}
-
-.content .jobtitle {
-    float: left;
-}
-
-.content .period_location {
-    float: right;
-    font-size: 1.1em;
-    margin-bottom: 0.5em;
-}
-
-.content .period_location .period {
-    margin-bottom: 0.2em;
-}
-
-.content .responsibilities {
-    clear: both;
-}
-
-.content .jobtitle {
-    margin-bottom: 0.5em;
-}
-
-.content .jobtitle h3 {
-    margin-bottom: 0.2em;
-}
-
-.content .employer {
-    text-decoration: none;
-    font-size: 1.05em;
-    margin: 0.4em 0 0.5em 0;
-}
-
-.content ol, .content ul, .content li {
-    margin-left: 0.75em;
-    padding-left: 0.5em;
-}
-
-.content p {
+h1, h2, h3, h3, h4, h5, h6 {
+    line-height: 1.1;
     margin: 0;
 }
 
-.content .social ul {
-    padding-left: 15px;
+header h1 {
+    font-size: 37px;
+    margin: 5px;
 }
 
-.content .social li {
-    padding-left: 0;
+header h2 {
+	font-size: 25px;
+	margin: 5px 0 10px 0;
 }
 
-.content table.contact th {
-    width: 25%;
+main {
+	padding: 0 10px 0 0;
 }
 
-.content table.education {
-    width: 100%;
+aside {
+    float: left;
+    height: 1600px;
+    margin-right: 10px;
+    padding: 5px;
+    width: 171px;
 }
 
-.content table.education td.degree {
-    font-weight: bold;
+footer {
+	font-size: 8px;
+	text-align: right;
 }
 
-.content table.education td.institution {
-
+section {
+	margin: 10px 0 20px 0;
 }
 
-.content table.languages {
-    width: 50%;
+article {
+    margin: 10px 0 10px 0;
 }
 
-.content table.skills {
-    margin: 0 0 1em 0;
+address {
+    font-style: normal;
 }
 
-.content table.skills .skill {
-    width: 150px;
+section h1 {
+	font-size: 20px;
 }
 
-.content table.skills .experience {
-    width: 50px;
+section h1 + hr {
+    border: 1px solid #9BA0A4;
+}
+
+article h2 {
+    font-size: 18px;
+    margin: 0 0 6px 0;
+}
+
+article h3 {
+    color: #666;
+    font-size: 14px;
+    margin: 0 0 6px 0;
+}
+
+article h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+article h3 a:hover {
+    text-decoration: underline;
+}
+
+article p {
+	line-height: 1.3;
+	margin: 3px 0 15px 0;
+}
+
+.headshot {
     text-align: center;
+}
+
+.headshot img {
+    border-radius: 50%;
+}
+
+.side-card {
+    font-family: 'Hind', 'Arial', sans-serif;
+    margin: 50px 0;
+    text-align: center;
+}
+
+.side-card img {
+    width: 50px;
+}
+
+.side-card a {
+    color: #666;
+}
+
+.work-period {
+	color: #666;
+	float: right;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.55;
+}
+
+.non-first-edu {
+    margin-top: 15px;
+}
+
+ul.work-experience {
+    margin: 8px 0 20px 0;
+    padding-left: 210px;
+}
+
+ul.work-experience li {
+    margin: 6px 0;
 }

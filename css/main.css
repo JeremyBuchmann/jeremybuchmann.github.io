@@ -481,7 +481,7 @@ section.cards {
 
 section.cards article {
 	/* border: 1px solid var(--nc-bg-3); */
-	width: 120px;
+	width: 130px;
 	height: 150px;
 	margin: 5px;
 	padding: 5px;
@@ -498,5 +498,5 @@ section.cards article img {
 }
 
 section.cards article p {
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 }

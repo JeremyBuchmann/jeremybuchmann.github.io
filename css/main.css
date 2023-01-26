@@ -456,6 +456,10 @@ img {
 	float:right;
 }
 
+.center {
+	text-align: center;
+}
+
 header h1 {
 	font-size: 2.488rem;
 	margin-bottom: 20px;
@@ -524,16 +528,28 @@ section.cards article p, section.cards article address {
 	text-align: right;
 }
 
-h3.employer {
+h4.employer {
 	padding-top: 0;
 }
 
-h3.employer a {
+h4.employer a {
 	color: var(--nc-tx-2);
 	text-decoration: none;
 }
 
-h3.employer a:hover {
+h4.employer a:hover {
 	color: var(--nc-lk-2);
 	text-decoration: underline;
+}
+
+@media print {
+	.no-print, .no-print * {
+		display: none !important;
+	}
+}
+
+@media screen {
+	.no-screen, .no-screen * {
+		display: none !important;
+	}
 }

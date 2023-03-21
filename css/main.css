@@ -528,6 +528,19 @@ section.cards article p, section.cards article address {
 	text-align: right;
 }
 
+ul.separated-row {
+	list-style: none;
+}
+
+ul.separated-row li {
+	display: inline;
+}
+
+ul.separated-row li + li:before {
+	content: " ⭑ ";
+	padding: 0 10px;
+}
+
 h4.employer {
 	padding-top: 0;
 }
